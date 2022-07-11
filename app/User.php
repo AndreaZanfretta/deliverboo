@@ -14,6 +14,10 @@ class User extends Authenticatable
         return $this->belongsTo('App\Product');
     }
 
+    public function types(){
+        return $this->belongsToMany('App\Type');
+    }
+
     /**
      * The attributes that are mass assignable.
      *
