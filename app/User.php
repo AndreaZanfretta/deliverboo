@@ -10,13 +10,17 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    public function product(){
+        return $this->belongsTo('App\Product');
+    }
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','address','piva',
     ];
 
     /**
