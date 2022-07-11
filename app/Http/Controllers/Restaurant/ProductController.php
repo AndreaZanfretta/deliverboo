@@ -4,9 +4,19 @@ namespace App\Http\Controllers\Restaurant;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Product;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
+    /* Validazioni */
+    protected $validations = [
+        'name' => 'required|max:100',
+        'price' => 'required|numeric|min:0',
+        'visible' => 'sometimes|accepted',
+        'image' => 'nullable|mimes:jpeg,jpg,bmp,png,svg'
+    ];
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +24,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::all();
+        return view('restaurant.products.index', compact('products'));
     }
 
     /**
@@ -24,7 +35,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('restaurant.products.create');
     }
 
     /**
@@ -35,7 +46,22 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate($this->validations);
+        $data = $request->all();
+        dump($data);
+        $newProduct = new Product();
+        $newProduct->name = $data['name'];
+        $newProduct->description = $data['description'];
+        $newProduct->price = $data['price'];
+        $newProduct->user_id = Auth::id();
+        $newProduct->visible = isset($data['visible']);
+        if(isset($data['image'])){
+            $path_image = Storage::put('uploads', $data['image']);
+            $newProduct->image = $path_image;
+        }
+
+        $newProduct->save();
+        return redirect()->route('restaurant.products.show', $newProduct->id);
     }
 
     /**
@@ -44,9 +70,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Product $product)
     {
-        //
+        return view('restaurant.products.show', compact('product'));
     }
 
     /**
@@ -57,7 +83,8 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        return view('restaurant.products.edit', compact('product'));
     }
 
     /**
@@ -67,9 +94,18 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
-        //
+        $request->validate($this->validations);
+        $data = $request->all();
+        $product->name = $data['name'];
+        $product->description = $data['description'];
+        $product->price = $data['price'];
+        $product->user_id = Auth::id();
+        $product->visible = isset($data['visible']);
+
+        $product->update();
+        return redirect()->route('restaurant.products.show', $product->id);
     }
 
     /**
@@ -80,6 +116,8 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $product->delete();
+        return redirect()->route('restaurant.products.index');
     }
 }

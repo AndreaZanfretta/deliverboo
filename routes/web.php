@@ -22,6 +22,7 @@ Route::middleware('auth')
     ->prefix('restaurant') //localhost:8000/admin
     ->group(function () {
         Route::get('/', 'HomeController@index')->name('home');
+        Route::resource('/products', 'ProductController');
     });
 
 Route::get('{any?}', function(){

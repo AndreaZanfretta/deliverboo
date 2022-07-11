@@ -10,8 +10,8 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    public function product(){
-        return $this->belongsTo('App\Product');
+    public function products(){
+        return $this->hasMany('App\Product');
     }
 
     public function types(){
