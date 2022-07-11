@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="{{asset('css/app.css')}}">
         
 
-        <title>Laravel</title>
+        <title>Deliverboo</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
