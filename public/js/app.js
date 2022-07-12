@@ -49572,8 +49572,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\Users\andre\Desktop\BooleanCareers\deliverboo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! E:\Users\andre\Desktop\BooleanCareers\deliverboo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\User\Alessandra\Desktop\coding\Boolean\deliverboo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\User\Alessandra\Desktop\coding\Boolean\deliverboo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
