@@ -5,6 +5,7 @@
  */
 
 require('./bootstrap');
+require('./parsley.min.js');
 
 window.Vue = require('vue');
 

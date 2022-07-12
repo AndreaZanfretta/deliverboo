@@ -9,9 +9,16 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
+    {{-- jquery --}}
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
+    {{-- Parsley cdn --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.js" integrity="sha512-Fq/wHuMI7AraoOK+juE5oYILKvSPe6GC5ZWZnvpOO/ZPdtyA29n+a5kVLP4XaLyDy9D1IBPYzdFycO33Ijd0Pg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+
+        
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -19,6 +26,14 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    {{-- style --}}
+    <style>
+        .parsley-errors-list li{
+            color: red;
+            list-style: none;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
@@ -75,7 +90,12 @@
 
         <main class="py-4">
             @yield('content')
+            <div id="msgid"></div>
         </main>
     </div>
+    <script type="text/javascript">
+        $('#registerForm').parsley();
+    </script>
+    
 </body>
 </html>

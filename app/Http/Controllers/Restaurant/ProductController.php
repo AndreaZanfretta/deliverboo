@@ -24,7 +24,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::where('user_id', Auth::id())->get();
         return view('restaurant.products.index', compact('products'));
     }
 
@@ -48,10 +48,11 @@ class ProductController extends Controller
     {
         $request->validate($this->validations);
         $data = $request->all();
-        dump($data);
         $newProduct = new Product();
         $newProduct->name = $data['name'];
-        $newProduct->description = $data['description'];
+        if(!empty($data['description'])){
+            $newProduct->description = $data['description'];
+        }
         $newProduct->price = $data['price'];
         $newProduct->user_id = Auth::id();
         $newProduct->visible = isset($data['visible']);

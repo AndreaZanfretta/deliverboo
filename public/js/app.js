@@ -49448,6 +49448,9 @@ window.deliverboo = {
 /***/ (function(module, exports, __webpack_require__) {
 
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* import jquery */
+
+window.$ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
  * for JavaScript based Bootstrap features such as modals and tabs. This
@@ -49572,8 +49575,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\User\Alessandra\Desktop\coding\Boolean\deliverboo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! E:\User\Alessandra\Desktop\coding\Boolean\deliverboo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\Users\andre\Desktop\BooleanCareers\deliverboo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\Users\andre\Desktop\BooleanCareers\deliverboo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

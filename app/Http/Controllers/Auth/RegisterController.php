@@ -54,9 +54,10 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:100'],
             'email' => ['required', 'string', 'email', 'max:100', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            /* 'address' => ['required', 'string', 'max:100'],
+            'address' => ['required', 'string', 'max:100'],
             'piva' => ['required', 'string', 'min:13', 'max:13', 'regex:/^[A-Z]{2}[0-9]{11}$/'],
-            'slug' => ['required', 'string', 'max:130'], */
+            'types' => ['required'],
+
         ]);
     }
 
