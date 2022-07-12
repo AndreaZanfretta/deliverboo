@@ -73,7 +73,12 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return view('restaurant.products.show', compact('product'));
+        if (Auth::id() !== $product['user_id']) {
+            return redirect('/');
+        }else{
+            return view('restaurant.products.show', compact('product'));
+        }
+        
     }
 
     /**
@@ -85,7 +90,11 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::findOrFail($id);
-        return view('restaurant.products.edit', compact('product'));
+        if (Auth::id() !== $product['user_id']){
+            return redirect('/');
+        }else{
+            return view('restaurant.products.edit', compact('product'));
+        }
     }
 
     /**
