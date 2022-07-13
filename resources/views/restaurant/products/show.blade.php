@@ -27,4 +27,7 @@
             </td>
         </tr>
   </table>
+  <div class="container">
+  </div>
+  <img src="{{ asset('storage/' . $product->image) }}" alt="">
   @endsection

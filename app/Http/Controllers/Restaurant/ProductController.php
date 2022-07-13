@@ -113,6 +113,7 @@ class ProductController extends Controller
         $product->price = $data['price'];
         $product->user_id = Auth::id();
         $product->visible = isset($data['visible']);
+    
         if(isset($data['image'])){
             Storage::delete($product->image);
             $path_image = Storage::put('uploads', $data['image']);

@@ -34,11 +34,11 @@
       <input type="checkbox" class="form-check-input" {{old('visible', $product->visible ) ? 'checked' : ''}} id="visible" name="visible">
       <label class="form-check-label" for="visible">Prodotto visibile?</label>
     </div>
-    <div class="form-group">
+    <div class="form-group @error('image') is-invalid @enderror">
       <img id="uploadPreview" width="100" src="https://via.placeholder.com/300x200">
       <label for="image">Aggiungi immagine</label>
       <input type="file" id="image" name="image" onchange="deliverboo.previewImage();">
-  </div>
+    </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 @endsection

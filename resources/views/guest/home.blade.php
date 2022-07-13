@@ -1,48 +1,16 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{asset('css/front.css')}}">
+    <title>Deliverboo</title>
+</head>
+<body>
+    <div id="root">
 
-@section('content')
-@guest
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('DeliveBoo') }}</div>
-
-                    <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-                        @if (Route::has('register'))
-                            <h2>Benvenuto! Registrati o accedi per poter iniziare a inserire prodotti</h2>
-                        @endif
-                        @else
-                        <div class="container">
-                            <div class="row justify-content-center">
-                                <div class="col-md-8">
-                                    <div class="card">
-                                        <div class="card-header">{{ __('DeliveBoo') }}</div>
-                    
-                                        <div class="card-body">
-                                            @if (session('status'))
-                                                <div class="alert alert-success" role="alert">
-                                                    {{ session('status') }}
-                                                </div>
-                                            @endif
-                                            <h2>Benvenuto  {{ Auth::user()->name }}!</h2>
-                                            <a href="{{route('restaurant.products.index')}}">
-                                            <div class="btn btn-info">Lista Prodotti</div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
-@endguest
-@endsection
+    <script src="{{asset('js/front.js')}}"></script>
+</body>
+</html>
