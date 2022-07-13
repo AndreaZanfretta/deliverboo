@@ -15,7 +15,7 @@ class ProductController extends Controller
         'name' => 'required|max:100',
         'price' => 'required|numeric|min:0',
         'visible' => 'sometimes|accepted',
-        'image' => 'nullable|mimes:jpeg,jpg,bmp,png,svg'
+        'image' => 'nullable|mimes:jpeg,jpg,bmp,png,svg,gif'
     ];
     /**
      * Display a listing of the resource.
@@ -113,6 +113,11 @@ class ProductController extends Controller
         $product->price = $data['price'];
         $product->user_id = Auth::id();
         $product->visible = isset($data['visible']);
+        if(isset($data['image'])){
+            Storage::delete($product->image);
+            $path_image = Storage::put('uploads', $data['image']);
+            $product->image = $path_image;
+        }
 
         $product->update();
         return redirect()->route('restaurant.products.show', $product->id);
