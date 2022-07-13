@@ -2,7 +2,7 @@
 
 @section('content')
 
-<form action="{{route('restaurant.products.update', $product->id)}}" method="POST" id="registerForm" data-parsley-validate>
+<form action="{{route('restaurant.products.update', $product->id)}}" method="POST" id="registerForm" data-parsley-validate enctype="multipart/form-data">
     @csrf
     @method('PUT')
     <div class="mb-3">

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Product;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use phpDocumentor\Reflection\Location;
 
 class ProductController extends Controller
 {
@@ -113,13 +114,11 @@ class ProductController extends Controller
         $product->price = $data['price'];
         $product->user_id = Auth::id();
         $product->visible = isset($data['visible']);
-    
         if(isset($data['image'])){
             Storage::delete($product->image);
             $path_image = Storage::put('uploads', $data['image']);
             $product->image = $path_image;
         }
-
         $product->update();
         return redirect()->route('restaurant.products.show', $product->id);
     }
