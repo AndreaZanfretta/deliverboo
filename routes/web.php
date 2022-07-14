@@ -23,6 +23,7 @@ Route::middleware('auth')
     ->group(function () {
         Route::get('/', 'HomeController@index')->name('home');
         Route::resource('/products', 'ProductController');
+        Route::resource('/users', 'UserController');
     });
 
 Route::get('{any?}', function(){

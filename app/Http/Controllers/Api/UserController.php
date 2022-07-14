@@ -1,33 +1,31 @@
 <?php
 
-namespace App\Http\Controllers\Restaurant;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
-use App\Type;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
+use Facade\Ignition\QueryRecorder\Query;
 
 class UserController extends Controller
 {
-
-    protected $validations = [
-        'name' => 'required|max:100',
-        'price' => 'required|numeric|min:0',
-        'visible' => 'sometimes|accepted',
-        'image' => 'nullable|mimes:jpeg,jpg,bmp,png,svg,gif'
-    ];
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        
+        //dd($request->query('category'));
+        if($request->query('category')){
+            $users = User::where('category_id',$request->query('category'))->get();
+        } else {
+            $users = User::all();
+        }
+
+        return response()->json($users);
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -47,21 +45,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate($this->validations);
-        $data = $request->all();
-        $newUser = new User();
-        $newUser->name = $data['name'];
-        $newUser->email = $data['email'];
-        $newUser->password = Hash::make($data['password']);
-        $newUser->address = $data['address'];
-        $newUser->piva = $data['piva'];
-        $newUser->slug = $this->getSlug();
-
-        $newUser->save();
-    
-        $newUser->types()->sync($data['types']);
-        dd($newUser);
-        return redirect()->route('restaurant');
+        //
     }
 
     /**

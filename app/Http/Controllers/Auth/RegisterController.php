@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -69,15 +70,29 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $newUser = new User();
         $slug = $this->getSlug($data['name']);
-        return User::create([
+        $newUser->name = $data['name'];
+        $newUser->email = $data['email'];
+        $newUser->password = Hash::make($data['password']);
+        $newUser->address = $data['address'];
+        $newUser->piva = $data['piva'];
+        $newUser->slug = $slug;
+
+        $newUser->save();
+
+        $newUser->types()->sync($data['types']);
+        return $newUser;
+        
+        /* return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'address' => $data['address'],
             'piva' => $data['piva'],
             'slug' => $slug,
-        ]);
+            /* $this->store($data),
+        ]); */
     }
 
     private function getSlug($title)
@@ -94,4 +109,6 @@ class RegisterController extends Controller
 
         return $slug;
     }
+
+    
 }
