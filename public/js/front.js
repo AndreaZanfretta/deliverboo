@@ -2019,7 +2019,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'SearchComponent',
   data: function data() {
-    return {};
+    return {
+      restaurants: []
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    axios.get('/api/search').then(function (res) {
+      console.log(res);
+      _this.restaurants = res.data;
+    })["catch"](function (err) {
+      console.error(err);
+    });
   }
 });
 
@@ -2235,15 +2247,14 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _vm._m(0);
+  return _c("div", [_c("p", [_vm._v("Search")]), _vm._v(" "), _vm.restaurants.length > 0 ? _c("ul", _vm._l(_vm.restaurants, function (restaurant, index) {
+    return _c("li", {
+      key: restaurant.id
+    }, [_vm._v("\n            " + _vm._s(index) + " - " + _vm._s(restaurant.name) + "\n        ")]);
+  }), 0) : _vm._e()]);
 };
 
-var staticRenderFns = [function () {
-  var _vm = this,
-      _c = _vm._self._c;
-
-  return _c("div", [_c("p", [_vm._v("Search")])]);
-}];
+var staticRenderFns = [];
 render._withStripped = true;
 
 

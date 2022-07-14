@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -24,7 +25,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','address','piva', 'slug', 'types',
+        'name', 'email', 'password','address','piva', 'slug', 'types[]',
     ];
 
     /**
@@ -44,5 +45,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    private function getSlug($title)
+    {
+        $slug = Str::of($title)->slug("-");
+        $count = 1;
+
+        // Prendi il primo post il cui slug è uguale a $slug
+        // se è presente allora genero un nuovo slug aggiungendo -$count
+        while( User::where("slug", $slug)->first() ) {
+            $slug = Str::of($title)->slug("-") . "-{$count}";
+            $count++;
+        }
+
+        return $slug;
+    }
     
 }
