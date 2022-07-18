@@ -18,6 +18,23 @@ window.Vue = require('vue');
 
 const app = new Vue({
     el: '#app',
+    data:{
+        productName: null,
+    },
+    methods:{
+        openModal(e, name){
+            e.preventDefault();
+            console.log(name.name)
+            this.productName = name.name;
+            console.log(e.currentTarget)
+            this.currentForm= e.currentTarget.parentNode;
+            console.log(this.currentForm);
+            $('#deleteModal').modal('show');
+        },
+        submitForm(){
+            this.currentForm.submit();
+        }
+    }
 });
 window.deliverboo = {
         previewImage(){

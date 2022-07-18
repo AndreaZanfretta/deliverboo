@@ -6,7 +6,7 @@
     @csrf
     @method('PUT')
     <div class="mb-3">
-        <label for="name" class="form-label">Nome Prodotto</label>
+        <label for="name" class="form-label">Nome Prodotto*</label>
         <input type="text" class="form-control  @error('name') is-invalid @enderror" required data-parsley-trigger="keyup" data-parsley-required-message="Il campo nome è obbligatorio" id="name" name="name" value="{{$product->name}}">
         @error('name')
             <div class="alert alert-danger">
@@ -17,6 +17,9 @@
     <div class="mb-3">
       <label for="description" class="form-label">Inserisci descrizione prodotto</label>
       <textarea name="description" id="description" cols="30" rows="10">{{$product->description}}</textarea>
+    </div>
+    <div>
+      <label for="price" class="form-label">Inserisci il prezzo del prodotto*</label><br>
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
@@ -39,6 +42,7 @@
       <label for="image">Aggiungi immagine</label>
       <input type="file" id="image" name="image" onchange="deliverboo.previewImage();">
     </div>
+    <p>I campi con * sono obbligatori</p>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 @endsection

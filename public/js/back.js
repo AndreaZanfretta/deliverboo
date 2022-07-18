@@ -49248,7 +49248,24 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
  */
 
 var app = new Vue({
-  el: '#app'
+  el: '#app',
+  data: {
+    productName: null
+  },
+  methods: {
+    openModal: function openModal(e, name) {
+      e.preventDefault();
+      console.log(name.name);
+      this.productName = name.name;
+      console.log(e.currentTarget);
+      this.currentForm = e.currentTarget.parentNode;
+      console.log(this.currentForm);
+      $('#deleteModal').modal('show');
+    },
+    submitForm: function submitForm() {
+      this.currentForm.submit();
+    }
+  }
 });
 window.deliverboo = {
   previewImage: function previewImage() {
