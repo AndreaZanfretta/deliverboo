@@ -55,9 +55,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($typeSlug)
+    public function show($slug)
     {
-        $user = Type::where("slug", "like", $typeSlug)->with(["user"])->get();
+        $user = User::where("slug", $slug)->with(["products"])->get();
         if(empty($user)){
             return response()->json([
                 

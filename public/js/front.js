@@ -2014,7 +2014,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'RestaurantComponent',
   data: function data() {
-    return {};
+    return {
+      user: null
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    var slug = this.$route.params.slug;
+    axios.get("/api/menu/".concat(slug)).then(function (response) {
+      _this.user = response.data[0];
+      console.log(_this.user.products);
+    })["catch"](function (err) {
+      console.error(err);
+    });
   }
 });
 
@@ -2263,15 +2276,14 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _vm._m(0);
+  return _c("div", [_c("p", [_vm._v("restaurant")]), _vm._v(" "), _vm.user ? _c("div", [_c("h2", [_vm._v(_vm._s(_vm.user.name))]), _vm._v(" "), _vm.user.products ? _c("div", _vm._l(_vm.user.products, function (product) {
+    return _c("ul", {
+      key: product.id
+    }, [_c("li", [_vm._v(_vm._s(product.name))])]);
+  }), 0) : _vm._e()]) : _vm._e()]);
 };
 
-var staticRenderFns = [function () {
-  var _vm = this,
-      _c = _vm._self._c;
-
-  return _c("div", [_c("p", [_vm._v("restaurant")])]);
-}];
+var staticRenderFns = [];
 render._withStripped = true;
 
 
