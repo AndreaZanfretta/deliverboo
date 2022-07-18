@@ -1,11 +1,10 @@
 <template>
     <div>
         <h2>Home</h2>
-        <ul v-if="restaurants.length > 0">
-            <li v-for="(restaurant, index) in restaurants" :key="restaurant.id">
-                {{index}} - {{restaurant.name}}
-            </li>
-        </ul>
+        <!-- <button><router-link :to="{ name: 'home', params: { slug: 'vegano' } }">Vegano</router-link></button> -->
+        <button v-for="(type) in types" :key="type.id">
+            <router-link :to="{ name: 'search', params: { slug: type.slug  } }">{{type.name}}</router-link>
+        </button>
     </div>
 </template>
 
@@ -14,18 +13,18 @@ export default {
     name: 'HomeComponent',
     data(){
         return{
-            restaurants: [],
+            types: [],
         }
     },
     created(){
-        axios.get('/api/home').then((response)=>{
-            console.log("responde" )
-            console.log(response.data);
-            this.restaurants = response.data;
-            console.log("Restaurant" )
-            console.log(this.restaurants)
+        axios.get('/api').then((response)=>{
+            this.types = response.data;
+            
         }
         )
+        .catch(err => {
+            console.error(err); 
+        })
     }
 }
 </script>

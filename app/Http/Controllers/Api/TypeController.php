@@ -4,11 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\User;
 use App\Type;
 use Facade\Ignition\QueryRecorder\Query;
 
-class UserController extends Controller
+class TypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,16 +16,16 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        dd($request);
-        if($request->query('type')){
-            $users = User::where('type_id',$request->query('type'))->get();
+        /* dump($request); */
+        if($request->query('slug')){
+            $types = Type::where('slug', $request->query('slug'))->get();
         } else {
-            $users = User::all();
+            $types = Type::all();
+            /* $types = Type::where('slug', 'vegetariano')->get(); */
         }
 
-        return response()->json($users);
+        return response()->json($types);
     }
-    
 
     /**
      * Show the form for creating a new resource.
@@ -55,17 +54,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($typeSlug)
+    public function show($id)
     {
-        $user = Type::where("slug", "like", $typeSlug)->with(["user"])->get();
-        if(empty($user)){
-            return response()->json([
-                
-                "success" => false,
-                "errors" => ["message"=>"Ristorante non trovato"]
-            ], 404);
-        }
-        return response()->json($user);
+        //
     }
 
     /**

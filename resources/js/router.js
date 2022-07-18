@@ -18,7 +18,7 @@ const router = new VueRouter({
             component: HomeComponent
        },
        {
-            path: '/search',
+            path: '/search/:slug',
             name: 'search',
             component: SearchComponent
         },

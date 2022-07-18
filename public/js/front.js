@@ -1986,18 +1986,16 @@ __webpack_require__.r(__webpack_exports__);
   name: 'HomeComponent',
   data: function data() {
     return {
-      restaurants: []
+      types: []
     };
   },
   created: function created() {
     var _this = this;
 
-    axios.get('/api/home').then(function (response) {
-      console.log("responde");
-      console.log(response.data);
-      _this.restaurants = response.data;
-      console.log("Restaurant");
-      console.log(_this.restaurants);
+    axios.get('/api').then(function (response) {
+      _this.types = response.data;
+    })["catch"](function (err) {
+      console.error(err);
     });
   }
 });
@@ -2035,17 +2033,32 @@ __webpack_require__.r(__webpack_exports__);
   name: 'SearchComponent',
   data: function data() {
     return {
-      restaurants: []
+      types: []
     };
   },
-  created: function created() {
+
+  /* created(){
+      axios.get('/api/search')
+      .then(res => {
+          console.log(res)
+          this.restaurants = res.data;
+      })
+      .catch(err => {
+          console.error(err); 
+      })
+  } */
+  mounted: function mounted() {
     var _this = this;
 
-    axios.get('/api/search').then(function (res) {
-      console.log(res);
-      _this.restaurants = res.data;
-    })["catch"](function (err) {
-      console.error(err);
+    var slug = this.$route.params.slug;
+    console.log(slug);
+    axios.get('/api/search/${slug}').then(function (response) {
+      console.log(response.data);
+      _this.types = response.data;
+    })["catch"](function (error) {
+      // handle error
+      console.log(error);
+      /* this.$router.push({name: 'page-404'}); */
     });
   }
 });
@@ -2204,11 +2217,20 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div", [_c("h2", [_vm._v("Home")]), _vm._v(" "), _vm.restaurants.length > 0 ? _c("ul", _vm._l(_vm.restaurants, function (restaurant, index) {
-    return _c("li", {
-      key: restaurant.id
-    }, [_vm._v("\n            " + _vm._s(index) + " - " + _vm._s(restaurant.name) + "\n        ")]);
-  }), 0) : _vm._e()]);
+  return _c("div", [_c("h2", [_vm._v("Home")]), _vm._v(" "), _vm._l(_vm.types, function (type) {
+    return _c("button", {
+      key: type.id
+    }, [_c("router-link", {
+      attrs: {
+        to: {
+          name: "search",
+          params: {
+            slug: type.slug
+          }
+        }
+      }
+    }, [_vm._v(_vm._s(type.name))])], 1);
+  })], 2);
 };
 
 var staticRenderFns = [];
@@ -2261,10 +2283,10 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div", [_c("p", [_vm._v("Search")]), _vm._v(" "), _vm.restaurants.length > 0 ? _c("ul", _vm._l(_vm.restaurants, function (restaurant, index) {
+  return _c("div", [_c("p", [_vm._v("Search")]), _vm._v(" "), _vm.types.length > 0 ? _c("ul", _vm._l(_vm.types, function (type) {
     return _c("li", {
-      key: restaurant.id
-    }, [_vm._v("\n            " + _vm._s(index) + " - " + _vm._s(restaurant.name) + "\n        ")]);
+      key: type.id
+    }, [_vm._v("\n            " + _vm._s(type.id) + " - " + _vm._s(type.name) + "\n        ")]);
   }), 0) : _vm._e()]);
 };
 
@@ -53498,7 +53520,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     name: 'home',
     component: _pages_HomeComponent__WEBPACK_IMPORTED_MODULE_2__["default"]
   }, {
-    path: '/search',
+    path: '/search/:slug',
     name: 'search',
     component: _pages_SearchComponent__WEBPACK_IMPORTED_MODULE_3__["default"]
   }, {
