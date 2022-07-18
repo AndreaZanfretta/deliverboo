@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
+use App\Type;
 use Facade\Ignition\QueryRecorder\Query;
 
 class UserController extends Controller
@@ -17,8 +18,8 @@ class UserController extends Controller
     public function index(Request $request)
     {
         //dd($request->query('category'));
-        if($request->query('category')){
-            $users = User::where('category_id',$request->query('category'))->get();
+        if($request->query('type')){
+            $users = User::where('type_id',$request->query('type'))->get();
         } else {
             $users = User::all();
         }
@@ -54,9 +55,16 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($typeSlug)
     {
-        //
+        $user = Type::where("slug", "like", $typeSlug)->with(["user"])->get();
+        if(empty($user)){
+            return response()->json([
+                "success" => false,
+                "errors" => ["message"=>"Ristorante non trovato"]
+            ], 404);
+        }
+        return response()->json($user);
     }
 
     /**

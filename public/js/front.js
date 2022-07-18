@@ -1947,7 +1947,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'AppMain',
   data: function data() {
-    return {};
+    return {
+      /* restaurants:[] */
+    };
   }
 });
 
@@ -1983,7 +1985,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'HomeComponent',
   data: function data() {
-    return {};
+    return {
+      restaurants: []
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    axios.get('/api/home').then(function (response) {
+      console.log("responde");
+      console.log(response.data);
+      _this.restaurants = response.data;
+      console.log("Restaurant");
+      console.log(_this.restaurants);
+    });
   }
 });
 
@@ -2189,15 +2204,14 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _vm._m(0);
+  return _c("div", [_c("h2", [_vm._v("Home")]), _vm._v(" "), _vm.restaurants.length > 0 ? _c("ul", _vm._l(_vm.restaurants, function (restaurant, index) {
+    return _c("li", {
+      key: restaurant.id
+    }, [_vm._v("\n            " + _vm._s(index) + " - " + _vm._s(restaurant.name) + "\n        ")]);
+  }), 0) : _vm._e()]);
 };
 
-var staticRenderFns = [function () {
-  var _vm = this,
-      _c = _vm._self._c;
-
-  return _c("div", [_c("p", [_vm._v("home")])]);
-}];
+var staticRenderFns = [];
 render._withStripped = true;
 
 
@@ -53577,7 +53591,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\Users\andre\Desktop\BooleanCareers\deliverboo\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! E:\User\Alessandra\Desktop\coding\Boolean\deliverboo\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

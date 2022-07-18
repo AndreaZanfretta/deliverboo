@@ -19,3 +19,5 @@ use Illuminate\Support\Facades\Route;
 }); */
 
 Route::get('/search', 'Api\UserController@index');
+Route::get('/{typeSlug}', 'Api\UserController@show');
+
