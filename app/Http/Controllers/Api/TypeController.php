@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Type;
 use Facade\Ignition\QueryRecorder\Query;
+use Illuminate\Support\Facades\DB;
 
 class TypeController extends Controller
 {
@@ -16,7 +17,6 @@ class TypeController extends Controller
      */
     public function index(Request $request)
     {
-        /* dump($request); */
         if($request->query('slug')){
             $types = Type::where('slug', $request->query('slug'))->get();
         } else {
@@ -54,9 +54,23 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        if($slug == 'tutti'){
+            $types = Type::with(["users"])->get();
+        }
+        else{
+            $types = Type::where("slug", $slug)->with(["users"])->get();
+        }
+        
+        if(empty($types)){
+            return response()->json([
+                "success" => false,
+                "errors" => ["message"=>"Ristorante non trovato"]
+            ], 404);
+            //return response()->json(["message"=>"Post not Found"], 404);
+        }
+        return response()->json($types);
     }
 
     /**

@@ -2052,7 +2052,7 @@ __webpack_require__.r(__webpack_exports__);
 
     var slug = this.$route.params.slug;
     console.log(slug);
-    axios.get('/api/search/${slug}').then(function (response) {
+    axios.get("/api/search/".concat(slug)).then(function (response) {
       console.log(response.data);
       _this.types = response.data;
     })["catch"](function (error) {
@@ -2217,7 +2217,16 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div", [_c("h2", [_vm._v("Home")]), _vm._v(" "), _vm._l(_vm.types, function (type) {
+  return _c("div", [_c("h2", [_vm._v("Home")]), _vm._v(" "), _c("button", [_c("router-link", {
+    attrs: {
+      to: {
+        name: "search",
+        params: {
+          slug: "tutti"
+        }
+      }
+    }
+  }, [_vm._v("Tutti")])], 1), _vm._v(" "), _vm._l(_vm.types, function (type) {
     return _c("button", {
       key: type.id
     }, [_c("router-link", {
@@ -2286,7 +2295,20 @@ var render = function render() {
   return _c("div", [_c("p", [_vm._v("Search")]), _vm._v(" "), _vm.types.length > 0 ? _c("ul", _vm._l(_vm.types, function (type) {
     return _c("li", {
       key: type.id
-    }, [_vm._v("\n            " + _vm._s(type.id) + " - " + _vm._s(type.name) + "\n        ")]);
+    }, [_vm._v("\n            " + _vm._s(type.id) + " - " + _vm._s(type.name) + "\n            "), _vm._l(type.users, function (restaurant) {
+      return _c("ul", {
+        key: restaurant.id
+      }, [_c("li", [_c("router-link", {
+        attrs: {
+          to: {
+            name: "menu",
+            params: {
+              slug: restaurant.slug
+            }
+          }
+        }
+      }, [_vm._v(_vm._s(restaurant.name))])], 1)]);
+    })], 2);
   }), 0) : _vm._e()]);
 };
 
@@ -53524,7 +53546,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     name: 'search',
     component: _pages_SearchComponent__WEBPACK_IMPORTED_MODULE_3__["default"]
   }, {
-    path: '/menu',
+    path: '/menu/:slug',
     name: 'menu',
     component: _pages_RestaurantComponent__WEBPACK_IMPORTED_MODULE_4__["default"]
   }, {

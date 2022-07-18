@@ -17,7 +17,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        dd($request);
+        /* dd($request); */
         if($request->query('type')){
             $users = User::where('type_id',$request->query('type'))->get();
         } else {

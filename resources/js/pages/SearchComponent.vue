@@ -2,10 +2,18 @@
     <div>
         <p>Search</p>
         <ul v-if="types.length > 0">
-            <li v-for="(type) in types" :key="type.id">
+            <li v-for="type in types" :key="type.id">
                 {{type.id}} - {{type.name}}
+                <ul v-for="restaurant in type.users" :key="restaurant.id">
+                    <li >
+                        <router-link :to="{ name: 'menu', params: { slug: restaurant.slug  } }">{{restaurant.name}}</router-link>
+                    </li>
+                </ul>
             </li>
         </ul>
+
+        
+        
     </div>
 </template>
 
@@ -30,10 +38,10 @@ export default {
     mounted(){
         const slug = this.$route.params.slug;
         console.log(slug)
-        axios.get('/api/search/${slug}').then((response)=>{
+        axios.get(`/api/search/${slug}`).then((response)=>{
             console.log(response.data)
             this.types = response.data;
-            
+
         })
         .catch((error) => {
             // handle error
