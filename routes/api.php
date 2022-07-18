@@ -18,4 +18,8 @@ use Illuminate\Support\Facades\Route;
     return $request->user();
 }); */
 
-Route::get('/search', 'Api\UserController@index');
+Route::get('/search/{slug}', 'Api\TypeController@show');
+Route::get('/', 'Api\TypeController@index');
+Route::get('/menu/{slug}', 'Api\UserController@show');
+
+
