@@ -4,8 +4,10 @@
         <div v-if="user">
              <h2>{{user.name}}</h2>
              <div v-if="user.products">
-                <ul v-for="product in user.products" :key="product.id">
-                    <li>{{product.name}}</li>
+                <ul>
+                    <li v-for="product in products" :key="product.id" v-bind:class="{isVisible: !product.visible}">
+                        {{product.visible}} - {{product.name}} - {{product.price}}&euro; - {{product.description}}
+                    </li>
                 </ul>
             </div>
         </div>
@@ -20,23 +22,38 @@ export default {
     data(){
         return{
             user: null,
+            products: null,
         }
     },
     created(){
         const slug = this.$route.params.slug;
         axios.get(`/api/menu/${slug}`).then((response)=>{
             this.user = response.data[0];
-            console.log(this.user.products)
+            this.products = this.user.products
+            //console.log(this.products)
             
         }
         )
         .catch(err => {
             console.error(err); 
         })
+    },
+    computed: {
+        classVisible: function (){
+            console.log(this)
+            return {
+                
+                isVisible: this.visible,
+                
+
+            }
+        }
     }
 }
 </script>
 
 <style scoped lang="scss">
-
+.isVisible {
+    text-decoration: line-through;
+}
 </style>
