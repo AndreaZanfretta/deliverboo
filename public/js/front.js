@@ -2022,6 +2022,7 @@ __webpack_require__.r(__webpack_exports__);
     filter: function filter() {
       var _this2 = this;
 
+      this.restaurantsList = [];
       var array = [];
       var checkboxes = document.querySelectorAll('input[type=checkbox]:checked');
 
@@ -2034,20 +2035,35 @@ __webpack_require__.r(__webpack_exports__);
       array.forEach(function (value) {
         var slug = value;
         axios.get("/api/search/".concat(slug)).then(function (response) {
-          _this2.filteredTypes = response.data;
-          console.log(_this2.filteredTypes);
+          _this2.filteredTypes = response.data; //console.log(this.filteredTypes)
+
           var users = _this2.filteredTypes[0].users;
           users.forEach(function (value) {
-            console.log(value); //console.log(this.restaurantsList)
+            console.log(value);
+            console.log(_this2.restaurantsList);
 
-            if (_this2.restaurantsList.indexOf(value) === -1) {
-              _this2.restaurantsList.push(value); //console.log("aggiunto")
-              //console.log(value)
-
-            } else {
+            if (_this2.restaurantsList.filter(function (e) {
+              return e.slug === value.slug;
+            }).length > 0) {
               console.log("già presente");
               console.log(value);
+            } else {
+              _this2.restaurantsList.push(value);
+
+              console.log("aggiunto");
+              console.log(value);
             }
+            /* if(this.restaurantsList.indexOf(value) === -1){
+                this.restaurantsList.push(value)
+                //console.log("aggiunto")
+                //console.log(value)
+              }
+            else {
+                
+                console.log("già presente")
+                console.log(value)
+            } */
+
           });
         })["catch"](function (error) {
           // handle error
@@ -2369,10 +2385,10 @@ var render = function render() {
         "for": type.name
       }
     }, [_vm._v(" " + _vm._s(type.name))])]);
-  }), _vm._v(" "), _vm._l(_vm.restaurantsList, function (restaurant) {
-    return _c("ul", {
+  }), _vm._v(" "), _c("ul", _vm._l(_vm.restaurantsList, function (restaurant) {
+    return _c("li", {
       key: restaurant.id
-    }, [_c("li", [_c("router-link", {
+    }, [_c("router-link", {
       attrs: {
         to: {
           name: "menu",
@@ -2381,8 +2397,8 @@ var render = function render() {
           }
         }
       }
-    }, [_vm._v(_vm._s(restaurant.name))])], 1)]);
-  })], 2);
+    }, [_vm._v(_vm._s(restaurant.name))])], 1);
+  }), 0)], 2);
 };
 
 var staticRenderFns = [];

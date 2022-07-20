@@ -36,8 +36,8 @@
                 </ul>
             </li>
         </ul> -->
-        <ul v-for="restaurant in restaurantsList" :key="restaurant.id">
-            <li >
+        <ul>
+            <li v-for="restaurant in restaurantsList" :key="restaurant.id">
                 <router-link :to="{ name: 'menu', params: { slug: restaurant.slug  } }">{{restaurant.name}}</router-link>
             </li>
         </ul>
@@ -87,6 +87,7 @@ export default {
     }, */
     methods:{
         filter(){
+            this.restaurantsList = [];
             var array = [];
             var checkboxes = document.querySelectorAll('input[type=checkbox]:checked');
             for (let i = 0; i < checkboxes.length; i++ ){
@@ -99,13 +100,26 @@ export default {
                     const slug = value;
                     axios.get(`/api/search/${slug}`).then((response)=>{
                     this.filteredTypes = response.data;
-                    console.log(this.filteredTypes)
+                    //console.log(this.filteredTypes)
                     let users = this.filteredTypes[0].users;
                     users.forEach(value => {
                         console.log(value)
-                        //console.log(this.restaurantsList)
+                        console.log(this.restaurantsList)
+                        
+                        if(this.restaurantsList.filter(e => e.slug === value.slug).length > 0) {
+                            console.log("già presente")
+                            console.log(value)
+                        }
+                        else {
+                            this.restaurantsList.push(value)
+                            console.log("aggiunto")
+                            console.log(value)
+                            
+                        }
 
-                        if(this.restaurantsList.indexOf(value) === -1){
+
+
+                        /* if(this.restaurantsList.indexOf(value) === -1){
                             this.restaurantsList.push(value)
                             //console.log("aggiunto")
                             //console.log(value)
@@ -115,7 +129,7 @@ export default {
                             
                             console.log("già presente")
                             console.log(value)
-                        }
+                        } */
                     })
                     
 
