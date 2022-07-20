@@ -1986,6 +1986,7 @@ __webpack_require__.r(__webpack_exports__);
   name: 'HomeComponent',
   data: function data() {
     return {
+      allTypes: [],
       types: []
     };
   },
@@ -1993,10 +1994,42 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     axios.get('/api').then(function (response) {
-      _this.types = response.data;
+      _this.allTypes = response.data;
     })["catch"](function (err) {
       console.error(err);
     });
+  },
+  mounted: function mounted() {
+    var _this2 = this;
+
+    var slug = this.$route.params.slug;
+    console.log(slug);
+    axios.get("/api/search/".concat(slug)).then(function (response) {
+      console.log(response.data);
+      _this2.types = response.data;
+      console.log("new mounted");
+    })["catch"](function (error) {
+      // handle error
+      console.log(error);
+      /* this.$router.push({name: 'page-404'}); */
+    });
+  },
+  methods: {
+    filter: function filter() {
+      var _this3 = this;
+
+      var slug = this.$route.params.slug;
+      console.log(slug);
+      axios.get("/api/search/".concat(slug)).then(function (response) {
+        console.log(response.data);
+        _this3.types = response.data;
+        console.log("new mounted");
+      })["catch"](function (error) {
+        // handle error
+        console.log(error);
+        /* this.$router.push({name: 'page-404'}); */
+      });
+    }
   }
 });
 
@@ -2239,29 +2272,53 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div", [_c("h2", [_vm._v("Home")]), _vm._v(" "), _c("button", [_c("router-link", {
+  return _c("div", [_c("h2", [_vm._v("Home")]), _vm._v(" "), _c("button", {
+    on: {
+      click: _vm.filter
+    }
+  }, [_c("router-link", {
     attrs: {
       to: {
-        name: "search",
+        name: "homeSlug",
         params: {
           slug: "tutti"
         }
       }
     }
-  }, [_vm._v("Tutti")])], 1), _vm._v(" "), _vm._l(_vm.types, function (type) {
+  }, [_vm._v("Tutti")])], 1), _vm._v(" "), _vm._l(_vm.allTypes, function (type) {
     return _c("button", {
-      key: type.id
+      key: type.id,
+      on: {
+        click: _vm.filter
+      }
     }, [_c("router-link", {
       attrs: {
         to: {
-          name: "search",
+          name: "homeSlug",
           params: {
             slug: type.slug
           }
         }
       }
     }, [_vm._v(_vm._s(type.name))])], 1);
-  })], 2);
+  }), _vm._v(" "), _vm.types.length > 0 ? _c("ul", _vm._l(_vm.types, function (type) {
+    return _c("li", {
+      key: type.id
+    }, [_vm._v("\n            " + _vm._s(type.id) + " - " + _vm._s(type.name) + "\n            "), _vm._l(type.users, function (restaurant) {
+      return _c("ul", {
+        key: restaurant.id
+      }, [_c("li", [_c("router-link", {
+        attrs: {
+          to: {
+            name: "menu",
+            params: {
+              slug: restaurant.slug
+            }
+          }
+        }
+      }, [_vm._v(_vm._s(restaurant.name))])], 1)]);
+    })], 2);
+  }), 0) : _vm._e()], 2);
 };
 
 var staticRenderFns = [];
@@ -54227,6 +54284,10 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   routes: [{
     path: '/',
     name: 'home',
+    component: _pages_HomeComponent__WEBPACK_IMPORTED_MODULE_2__["default"]
+  }, {
+    path: '/:slug',
+    name: 'homeSlug',
     component: _pages_HomeComponent__WEBPACK_IMPORTED_MODULE_2__["default"]
   }, {
     path: '/search/:slug',

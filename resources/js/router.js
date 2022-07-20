@@ -18,6 +18,11 @@ const router = new VueRouter({
             component: HomeComponent
        },
        {
+            path: '/:slug',
+            name: 'homeSlug',
+            component: HomeComponent
+        },
+       {
             path: '/search/:slug',
             name: 'search',
             component: SearchComponent
