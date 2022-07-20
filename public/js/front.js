@@ -1987,7 +1987,10 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       allTypes: [],
-      types: []
+      filteredTypes: [],
+      filteredSlugs: [],
+      restaurantsList: [],
+      checkedFilters: []
     };
   },
   created: function created() {
@@ -1999,36 +2002,96 @@ __webpack_require__.r(__webpack_exports__);
       console.error(err);
     });
   },
-  mounted: function mounted() {
-    var _this2 = this;
 
-    var slug = this.$route.params.slug;
-    console.log(slug);
-    axios.get("/api/search/".concat(slug)).then(function (response) {
-      console.log(response.data);
-      _this2.types = response.data;
-      console.log("new mounted");
-    })["catch"](function (error) {
-      // handle error
-      console.log(error);
-      /* this.$router.push({name: 'page-404'}); */
-    });
-  },
+  /* mounted(){
+      const slug = this.$route.params.slug;
+      console.log(slug)
+      axios.get(`/api/search/${slug}`).then((response)=>{
+          
+          this.filteredTypes.push(response.data);
+          console.log("new mounted")
+          console.log(this.filteredTypes)
+        })
+      .catch((error) => {
+          // handle error
+          console.log(error);
+          // this.$router.push({name: 'page-404'});
+      })
+  }, */
   methods: {
     filter: function filter() {
+      var _this2 = this;
+
+      var array = [];
+      var checkboxes = document.querySelectorAll('input[type=checkbox]:checked');
+
+      for (var i = 0; i < checkboxes.length; i++) {
+        array.push(checkboxes[i].value);
+      } //console.log(array)
+      //console.log(checkboxes)
+
+
+      array.forEach(function (value) {
+        var slug = value;
+        axios.get("/api/search/".concat(slug)).then(function (response) {
+          _this2.filteredTypes = response.data;
+          console.log(_this2.filteredTypes);
+          var users = _this2.filteredTypes[0].users;
+          users.forEach(function (value) {
+            console.log(value); //console.log(this.restaurantsList)
+
+            if (_this2.restaurantsList.indexOf(value) === -1) {
+              _this2.restaurantsList.push(value); //console.log("aggiunto")
+              //console.log(value)
+
+            } else {
+              console.log("già presente");
+              console.log(value);
+            }
+          });
+        })["catch"](function (error) {
+          // handle error
+          console.log(error);
+          /* this.$router.push({name: 'page-404'}); */
+        });
+      });
+      /*             const slug = this.$route.params.slug;
+                  this.filteredSlugs.push(slug);
+                  axios.get(`/api/search/${slug}`).then((response)=>{
+                      this.filteredTypes = response.data;
+                  })
+                  .catch((error) => {
+                      // handle error
+                      console.log(error);
+                      // this.$router.push({name: 'page-404'}); 
+                  }) */
+    },
+    makeRestaurants: function makeRestaurants(types) {
       var _this3 = this;
 
-      var slug = this.$route.params.slug;
-      console.log(slug);
-      axios.get("/api/search/".concat(slug)).then(function (response) {
-        console.log(response.data);
-        _this3.types = response.data;
-        console.log("new mounted");
-      })["catch"](function (error) {
-        // handle error
-        console.log(error);
-        /* this.$router.push({name: 'page-404'}); */
+      //console.log(value[0].users)
+      var users = types[0].users; //console.log(users)
+
+      this.restaurantsA = users; //console.log("RESTAURANTS A")
+      //console.log(this.restaurantsA)
+
+      this.restaurantsA.forEach(function (value) {
+        //console.log(value);
+        //console.log(this.restaurantsList);
+        _this3.restaurantsList;
+
+        if (_this3.restaurantsList.indexOf(value) === -1) {
+          _this3.restaurantsList.push(value);
+
+          console.log("aggiunto");
+          console.log(value);
+        } else {
+          console.log("già presente");
+          console.log(value);
+        }
       });
+      console.log(this.restaurantsList); //console.log("LISTA")
+      //console.log(this.restaurantsList)
     }
   }
 });
@@ -2286,39 +2349,40 @@ var render = function render() {
       }
     }
   }, [_vm._v("Tutti")])], 1), _vm._v(" "), _vm._l(_vm.allTypes, function (type) {
-    return _c("button", {
-      key: type.id,
+    return _c("div", {
+      key: type.id
+    }, [_c("input", {
+      staticClass: "filterCheckboxes",
+      attrs: {
+        type: "checkbox",
+        id: type.name,
+        name: "typeCheckbox"
+      },
+      domProps: {
+        value: type.slug
+      },
       on: {
         click: _vm.filter
       }
-    }, [_c("router-link", {
+    }), _vm._v(" "), _c("label", {
+      attrs: {
+        "for": type.name
+      }
+    }, [_vm._v(" " + _vm._s(type.name))])]);
+  }), _vm._v(" "), _vm._l(_vm.restaurantsList, function (restaurant) {
+    return _c("ul", {
+      key: restaurant.id
+    }, [_c("li", [_c("router-link", {
       attrs: {
         to: {
-          name: "homeSlug",
+          name: "menu",
           params: {
-            slug: type.slug
+            slug: restaurant.slug
           }
         }
       }
-    }, [_vm._v(_vm._s(type.name))])], 1);
-  }), _vm._v(" "), _vm.types.length > 0 ? _c("ul", _vm._l(_vm.types, function (type) {
-    return _c("li", {
-      key: type.id
-    }, [_vm._v("\n            " + _vm._s(type.id) + " - " + _vm._s(type.name) + "\n            "), _vm._l(type.users, function (restaurant) {
-      return _c("ul", {
-        key: restaurant.id
-      }, [_c("li", [_c("router-link", {
-        attrs: {
-          to: {
-            name: "menu",
-            params: {
-              slug: restaurant.slug
-            }
-          }
-        }
-      }, [_vm._v(_vm._s(restaurant.name))])], 1)]);
-    })], 2);
-  }), 0) : _vm._e()], 2);
+    }, [_vm._v(_vm._s(restaurant.name))])], 1)]);
+  })], 2);
 };
 
 var staticRenderFns = [];
