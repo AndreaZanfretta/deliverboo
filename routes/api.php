@@ -19,8 +19,9 @@ use Illuminate\Support\Facades\Route;
 }); */
 
 Route::get('/search/{slug}', 'Api\TypeController@show');
+Route::get('/menu', 'Api\UserController@index');
 Route::get('/', 'Api\TypeController@index');
-Route::get('/{slug}', 'Api\TypeController@show');
+/* Route::get('/{slug}', 'Api\TypeController@show'); */
 Route::get('/menu/{slug}', 'Api\UserController@show');
 
 

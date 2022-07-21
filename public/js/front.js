@@ -2002,22 +2002,22 @@ __webpack_require__.r(__webpack_exports__);
       console.error(err);
     });
   },
-
-  /* mounted(){
-      const slug = this.$route.params.slug;
-      console.log(slug)
-      axios.get(`/api/search/${slug}`).then((response)=>{
-          
-          this.filteredTypes.push(response.data);
-          console.log("new mounted")
-          console.log(this.filteredTypes)
-        })
-      .catch((error) => {
-          // handle error
-          console.log(error);
-          // this.$router.push({name: 'page-404'});
+  mounted: function mounted() {
+    this.getFullRestaurants();
+    /* const slug = this.$route.params.slug;
+    console.log(slug)
+    axios.get(`/api/search/${slug}`).then((response)=>{
+        
+        this.filteredTypes.push(response.data);
+        console.log("new mounted")
+        console.log(this.filteredTypes)
       })
-  }, */
+    .catch((error) => {
+        // handle error
+        console.log(error);
+        // this.$router.push({name: 'page-404'});
+    }) */
+  },
   methods: {
     filter: function filter() {
       var _this2 = this;
@@ -2026,51 +2026,54 @@ __webpack_require__.r(__webpack_exports__);
       var array = [];
       var checkboxes = document.querySelectorAll('input[type=checkbox]:checked');
 
-      for (var i = 0; i < checkboxes.length; i++) {
-        array.push(checkboxes[i].value);
-      } //console.log(array)
-      //console.log(checkboxes)
+      if (checkboxes.length < 1) {
+        this.getFullRestaurants();
+      } else {
+        for (var i = 0; i < checkboxes.length; i++) {
+          array.push(checkboxes[i].value);
+        } //console.log(array)
 
 
-      array.forEach(function (value) {
-        var slug = value;
-        axios.get("/api/search/".concat(slug)).then(function (response) {
-          _this2.filteredTypes = response.data; //console.log(this.filteredTypes)
+        array.forEach(function (value) {
+          var slug = value;
+          axios.get("/api/search/".concat(slug)).then(function (response) {
+            _this2.filteredTypes = response.data; //console.log(this.filteredTypes)
 
-          var users = _this2.filteredTypes[0].users;
-          users.forEach(function (value) {
-            console.log(value);
-            console.log(_this2.restaurantsList);
-
-            if (_this2.restaurantsList.filter(function (e) {
-              return e.slug === value.slug;
-            }).length > 0) {
-              console.log("già presente");
+            var users = _this2.filteredTypes[0].users;
+            users.forEach(function (value) {
               console.log(value);
-            } else {
-              _this2.restaurantsList.push(value);
+              console.log(_this2.restaurantsList);
 
-              console.log("aggiunto");
-              console.log(value);
-            }
-            /* if(this.restaurantsList.indexOf(value) === -1){
-                this.restaurantsList.push(value)
-                //console.log("aggiunto")
-                //console.log(value)
+              if (_this2.restaurantsList.filter(function (e) {
+                return e.slug === value.slug;
+              }).length > 0) {
+                console.log("già presente");
+                console.log(value);
+              } else {
+                _this2.restaurantsList.push(value);
+
+                console.log("aggiunto");
+                console.log(value);
               }
-            else {
-                
-                console.log("già presente")
-                console.log(value)
-            } */
+              /* if(this.restaurantsList.indexOf(value) === -1){
+                  this.restaurantsList.push(value)
+                  //console.log("aggiunto")
+                  //console.log(value)
+                }
+              else {
+                  
+                  console.log("già presente")
+                  console.log(value)
+              } */
 
+            });
+          })["catch"](function (error) {
+            // handle error
+            console.log(error);
+            /* this.$router.push({name: 'page-404'}); */
           });
-        })["catch"](function (error) {
-          // handle error
-          console.log(error);
-          /* this.$router.push({name: 'page-404'}); */
         });
-      });
+      }
       /*             const slug = this.$route.params.slug;
                   this.filteredSlugs.push(slug);
                   axios.get(`/api/search/${slug}`).then((response)=>{
@@ -2081,6 +2084,7 @@ __webpack_require__.r(__webpack_exports__);
                       console.log(error);
                       // this.$router.push({name: 'page-404'}); 
                   }) */
+
     },
     makeRestaurants: function makeRestaurants(types) {
       var _this3 = this;
@@ -2108,6 +2112,16 @@ __webpack_require__.r(__webpack_exports__);
       });
       console.log(this.restaurantsList); //console.log("LISTA")
       //console.log(this.restaurantsList)
+    },
+    getFullRestaurants: function getFullRestaurants() {
+      var _this4 = this;
+
+      axios.get('/api/menu').then(function (res) {
+        _this4.restaurantsList = res.data;
+        console.log(_this4.restaurantsList);
+      })["catch"](function (err) {
+        console.error(err);
+      });
     }
   }
 });
@@ -54463,7 +54477,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\User\Alessandra\Desktop\coding\Boolean\deliverboo\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! E:\Users\andre\Desktop\BooleanCareers\deliverboo\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

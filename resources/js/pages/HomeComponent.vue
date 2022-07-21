@@ -69,8 +69,9 @@ export default {
             console.error(err); 
         })
     },
-    /* mounted(){
-        const slug = this.$route.params.slug;
+    mounted(){
+        this.getFullRestaurants();
+        /* const slug = this.$route.params.slug;
         console.log(slug)
         axios.get(`/api/search/${slug}`).then((response)=>{
             
@@ -83,19 +84,20 @@ export default {
             // handle error
             console.log(error);
             // this.$router.push({name: 'page-404'});
-        })
-    }, */
+        }) */
+    },
     methods:{
         filter(){
             this.restaurantsList = [];
             var array = [];
             var checkboxes = document.querySelectorAll('input[type=checkbox]:checked');
+            if(checkboxes.length < 1){
+                this.getFullRestaurants();
+            }else{
             for (let i = 0; i < checkboxes.length; i++ ){
                 array.push(checkboxes[i].value)
             }
             //console.log(array)
-            //console.log(checkboxes)
-
             array.forEach(value => {
                     const slug = value;
                     axios.get(`/api/search/${slug}`).then((response)=>{
@@ -141,7 +143,7 @@ export default {
                     console.log(error);
                     /* this.$router.push({name: 'page-404'}); */
                 })
-            })
+            })}
 
 
 /*             const slug = this.$route.params.slug;
@@ -186,6 +188,16 @@ export default {
             //console.log(this.restaurantsList)
 
 
+        },
+        getFullRestaurants(){
+            axios.get('/api/menu')
+        .then(res => {
+            this.restaurantsList = res.data;
+            console.log(this.restaurantsList)
+        })
+        .catch(err => {
+            console.error(err); 
+        })
         }
     }
 }
