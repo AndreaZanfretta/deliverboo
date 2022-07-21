@@ -21,7 +21,7 @@ class UserController extends Controller
         if($request->query('type')){
             $users = User::where('type_id',$request->query('type'))->get();
         } else {
-            $users = User::all();
+            $users = User::with('types')->get();
         }
 
         return response()->json($users);

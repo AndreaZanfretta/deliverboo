@@ -1986,17 +1986,81 @@ __webpack_require__.r(__webpack_exports__);
   name: 'HomeComponent',
   data: function data() {
     return {
-      types: []
+      allTypes: [],
+      filteredTypes: [],
+      filteredSlugs: [],
+      restaurantsList: [],
+      checkedFilters: []
     };
   },
   created: function created() {
     var _this = this;
 
     axios.get('/api').then(function (response) {
-      _this.types = response.data;
+      _this.allTypes = response.data;
     })["catch"](function (err) {
       console.error(err);
     });
+  },
+  mounted: function mounted() {
+    this.getFullRestaurants();
+  },
+  methods: {
+    filter: function filter() {
+      var _this2 = this;
+
+      this.restaurantsList = [];
+      var array = [];
+      var checkboxes = document.querySelectorAll('input[type=checkbox]:checked');
+
+      if (checkboxes.length < 1) {
+        this.getFullRestaurants();
+      } else {
+        for (var i = 0; i < checkboxes.length; i++) {
+          array.push(checkboxes[i].value);
+        } //console.log(array)
+
+
+        array.forEach(function (value) {
+          var slug = value;
+          axios.get("/api/search/".concat(slug)).then(function (response) {
+            _this2.filteredTypes = response.data; //console.log(this.filteredTypes)
+
+            var users = _this2.filteredTypes[0].users;
+            users.forEach(function (value) {
+              console.log(value);
+              console.log(_this2.restaurantsList);
+
+              if (_this2.restaurantsList.filter(function (e) {
+                return e.slug === value.slug;
+              }).length > 0) {
+                console.log("già presente");
+                console.log(value);
+              } else {
+                _this2.restaurantsList.push(value);
+
+                console.log("aggiunto");
+                console.log(value);
+              }
+            });
+          })["catch"](function (error) {
+            // handle error
+            console.log(error);
+            /* this.$router.push({name: 'page-404'}); */
+          });
+        });
+      }
+    },
+    getFullRestaurants: function getFullRestaurants() {
+      var _this3 = this;
+
+      axios.get('/api/menu').then(function (res) {
+        _this3.restaurantsList = res.data;
+        console.log(_this3.restaurantsList);
+      })["catch"](function (err) {
+        console.error(err);
+      });
+    }
   }
 });
 
@@ -2239,29 +2303,54 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div", [_c("h2", [_vm._v("Home")]), _vm._v(" "), _c("button", [_c("router-link", {
+  return _c("div", [_c("h2", [_vm._v("Home")]), _vm._v(" "), _c("button", {
+    on: {
+      click: _vm.filter
+    }
+  }, [_c("router-link", {
     attrs: {
       to: {
-        name: "search",
+        name: "homeSlug",
         params: {
           slug: "tutti"
         }
       }
     }
-  }, [_vm._v("Tutti")])], 1), _vm._v(" "), _vm._l(_vm.types, function (type) {
-    return _c("button", {
+  }, [_vm._v("Tutti")])], 1), _vm._v(" "), _vm._l(_vm.allTypes, function (type) {
+    return _c("div", {
       key: type.id
+    }, [_c("input", {
+      staticClass: "filterCheckboxes",
+      attrs: {
+        type: "checkbox",
+        id: type.name,
+        name: "typeCheckbox"
+      },
+      domProps: {
+        value: type.slug
+      },
+      on: {
+        click: _vm.filter
+      }
+    }), _vm._v(" "), _c("label", {
+      attrs: {
+        "for": type.name
+      }
+    }, [_vm._v(" " + _vm._s(type.name))])]);
+  }), _vm._v(" "), _c("ul", _vm._l(_vm.restaurantsList, function (restaurant) {
+    return _c("li", {
+      key: restaurant.id
     }, [_c("router-link", {
       attrs: {
         to: {
-          name: "search",
+          name: "menu",
           params: {
-            slug: type.slug
+            slug: restaurant.slug
           }
         }
       }
-    }, [_vm._v(_vm._s(type.name))])], 1);
-  })], 2);
+    }, [_vm._v(_vm._s(restaurant.name))])], 1);
+  }), 0)], 2);
 };
 
 var staticRenderFns = [];
@@ -54229,6 +54318,10 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     name: 'home',
     component: _pages_HomeComponent__WEBPACK_IMPORTED_MODULE_2__["default"]
   }, {
+    path: '/:slug',
+    name: 'homeSlug',
+    component: _pages_HomeComponent__WEBPACK_IMPORTED_MODULE_2__["default"]
+  }, {
     path: '/search/:slug',
     name: 'search',
     component: _pages_SearchComponent__WEBPACK_IMPORTED_MODULE_3__["default"]
@@ -54322,7 +54415,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\User\Alessandra\Desktop\coding\Boolean\deliverboo\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! E:\Users\andre\Desktop\BooleanCareers\deliverboo\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })
