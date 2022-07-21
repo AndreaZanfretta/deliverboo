@@ -2004,19 +2004,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.getFullRestaurants();
-    /* const slug = this.$route.params.slug;
-    console.log(slug)
-    axios.get(`/api/search/${slug}`).then((response)=>{
-        
-        this.filteredTypes.push(response.data);
-        console.log("new mounted")
-        console.log(this.filteredTypes)
-      })
-    .catch((error) => {
-        // handle error
-        console.log(error);
-        // this.$router.push({name: 'page-404'});
-    }) */
   },
   methods: {
     filter: function filter() {
@@ -2055,17 +2042,6 @@ __webpack_require__.r(__webpack_exports__);
                 console.log("aggiunto");
                 console.log(value);
               }
-              /* if(this.restaurantsList.indexOf(value) === -1){
-                  this.restaurantsList.push(value)
-                  //console.log("aggiunto")
-                  //console.log(value)
-                }
-              else {
-                  
-                  console.log("già presente")
-                  console.log(value)
-              } */
-
             });
           })["catch"](function (error) {
             // handle error
@@ -2074,51 +2050,13 @@ __webpack_require__.r(__webpack_exports__);
           });
         });
       }
-      /*             const slug = this.$route.params.slug;
-                  this.filteredSlugs.push(slug);
-                  axios.get(`/api/search/${slug}`).then((response)=>{
-                      this.filteredTypes = response.data;
-                  })
-                  .catch((error) => {
-                      // handle error
-                      console.log(error);
-                      // this.$router.push({name: 'page-404'}); 
-                  }) */
-
-    },
-    makeRestaurants: function makeRestaurants(types) {
-      var _this3 = this;
-
-      //console.log(value[0].users)
-      var users = types[0].users; //console.log(users)
-
-      this.restaurantsA = users; //console.log("RESTAURANTS A")
-      //console.log(this.restaurantsA)
-
-      this.restaurantsA.forEach(function (value) {
-        //console.log(value);
-        //console.log(this.restaurantsList);
-        _this3.restaurantsList;
-
-        if (_this3.restaurantsList.indexOf(value) === -1) {
-          _this3.restaurantsList.push(value);
-
-          console.log("aggiunto");
-          console.log(value);
-        } else {
-          console.log("già presente");
-          console.log(value);
-        }
-      });
-      console.log(this.restaurantsList); //console.log("LISTA")
-      //console.log(this.restaurantsList)
     },
     getFullRestaurants: function getFullRestaurants() {
-      var _this4 = this;
+      var _this3 = this;
 
       axios.get('/api/menu').then(function (res) {
-        _this4.restaurantsList = res.data;
-        console.log(_this4.restaurantsList);
+        _this3.restaurantsList = res.data;
+        console.log(_this3.restaurantsList);
       })["catch"](function (err) {
         console.error(err);
       });
