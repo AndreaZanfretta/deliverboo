@@ -2001,23 +2001,32 @@ __webpack_require__.r(__webpack_exports__);
       restaurantsList: [],
       checkedFilters: [],
       images: [{
-        name: 'ristorante-italiano.jpg'
+        src: 'ristorante-italiano.jpg',
+        name: 'Italiano'
       }, {
-        name: 'pizzeria.jpg'
+        src: 'pizzeria.jpg',
+        name: 'Pizzeria'
       }, {
-        name: 'kebab.jpg'
+        src: 'kebab.jpg',
+        name: 'Kebab'
       }, {
-        name: 'fastfood.jpg'
+        src: 'fastfood.jpg',
+        name: 'Fast Food'
       }, {
-        name: 'ristorante-giapponese.jpg'
+        src: 'ristorante-giapponese.jpg',
+        name: 'Giapponese'
       }, {
-        name: 'ristorante-cinese.jpg'
+        src: 'ristorante-cinese.jpg',
+        name: 'Cinese'
       }, {
-        name: 'sushi.jpg'
+        src: 'sushi.jpg',
+        name: 'Sushi'
       }, {
-        name: 'vegetariano.jpg'
+        src: 'vegetariano.jpg',
+        name: 'Vegetariano'
       }, {
-        name: 'vegano.jpg'
+        src: 'vegano.jpg',
+        name: 'Vegano'
       }],
       votes: [{
         name: 'Nessuna recensione',
@@ -2475,9 +2484,9 @@ var render = function render() {
     }, [_c("img", {
       staticClass: "banner",
       attrs: {
-        src: "/img/types/".concat(_vm.images[index].name)
+        src: "/img/types/".concat(_vm.images[index].src)
       }
-    })])]);
+    }), _vm._v(" "), _c("span", [_vm._v(_vm._s(_vm.images[index].name))])])]);
   }), 0), _vm._v(" "), _c("div", {
     staticClass: "restaurantsContainer row"
   }, _vm._l(_vm.restaurantsList, function (restaurant) {
@@ -7033,7 +7042,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "*[data-v-696945b6] {\n  box-sizing: border-box;\n  padding: 0;\n  margin: 0;\n}\n.container[data-v-696945b6] {\n  margin: 0 auto;\n}\n.bannerContainer[data-v-696945b6] {\n  height: 600px;\n  width: 100%;\n  text-align: center;\n  -o-object-fit: contain;\n     object-fit: contain;\n  background-image: url(\"/img/banner/home-banner.jpg\");\n}\n.bannerContainer .filter[data-v-696945b6] {\n  display: flex;\n  justify-content: center;\n  align-items: flex-end;\n  width: 100%;\n  height: 100%;\n  background: linear-gradient(to top, transparent, rgba(0, 0, 0, 0.678));\n}\n.bannerContainer .filter .textContainer[data-v-696945b6] {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  background-color: white;\n  border-radius: 15px;\n  margin-bottom: 50px;\n  width: 30%;\n}\n.bannerContainer .filter .textContainer h2[data-v-696945b6] {\n  color: rgb(140, 31, 243);\n  padding: 25px 50px;\n}\n.filterContainer[data-v-696945b6] {\n  padding-top: 50px;\n}\n.filterContainer .checkboxesContainer .checkbox label[data-v-696945b6] {\n  border: 3px solid transparent;\n  border-radius: 20px;\n}\n.filterContainer .checkboxesContainer .checkbox label img[data-v-696945b6] {\n  width: 150px;\n  height: 100px;\n  padding: 5px;\n  border-radius: 20px;\n}\n.filterContainer .checkboxesContainer .checkbox input[data-v-696945b6] {\n  display: none;\n}\n.filterContainer .checkboxesContainer .checkbox :checked + label[data-v-696945b6] {\n  border: 3px solid rgb(161, 27, 250);\n}\n.filterContainer .restaurantsContainer[data-v-696945b6] {\n  min-height: 300px;\n}\n.filterContainer .restaurantsContainer .restaurant[data-v-696945b6] {\n  border-radius: 5px;\n}\n.filterContainer .restaurantsContainer .restaurant img[data-v-696945b6] {\n  width: 100%;\n  height: 100px;\n  border-radius: 5px 5px 0 0;\n}\n.filterContainer .restaurantsContainer a[data-v-696945b6] {\n  color: black;\n}\n.filterContainer .restaurantsContainer a[data-v-696945b6]:hover {\n  text-decoration: none;\n}", ""]);
+exports.push([module.i, "*[data-v-696945b6] {\n  box-sizing: border-box;\n  padding: 0;\n  margin: 0;\n}\n.container[data-v-696945b6] {\n  margin: 0 auto;\n}\n.bannerContainer[data-v-696945b6] {\n  height: 600px;\n  width: 100%;\n  text-align: center;\n  -o-object-fit: contain;\n     object-fit: contain;\n  background-image: url(\"/img/banner/home-banner.jpg\");\n}\n.bannerContainer .filter[data-v-696945b6] {\n  display: flex;\n  justify-content: center;\n  align-items: flex-end;\n  width: 100%;\n  height: 100%;\n  background: linear-gradient(to top, transparent, rgba(0, 0, 0, 0.678));\n}\n.bannerContainer .filter .textContainer[data-v-696945b6] {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  background-color: white;\n  border-radius: 15px;\n  margin-bottom: 50px;\n  width: 30%;\n}\n.bannerContainer .filter .textContainer h2[data-v-696945b6] {\n  color: rgb(140, 31, 243);\n  padding: 25px 50px;\n}\n.filterContainer[data-v-696945b6] {\n  padding-top: 50px;\n}\n.filterContainer .checkboxesContainer .checkbox label[data-v-696945b6] {\n  border-radius: 20px;\n  display: flex;\n  flex-flow: column nowrap;\n  align-items: center;\n  margin: 10px;\n  cursor: pointer;\n  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);\n}\n.filterContainer .checkboxesContainer .checkbox label img[data-v-696945b6] {\n  width: 100%;\n  height: 120px;\n  border-radius: 20px 20px 0 0;\n}\n.filterContainer .checkboxesContainer .checkbox label span[data-v-696945b6] {\n  margin: 5px 0;\n}\n.filterContainer .checkboxesContainer .checkbox label[data-v-696945b6]:hover {\n  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.36), -2px -2px 4px 0 rgba(0, 0, 0, 0.14);\n}\n.filterContainer .checkboxesContainer .checkbox input[data-v-696945b6] {\n  display: none;\n}\n.filterContainer .checkboxesContainer .checkbox :checked + label[data-v-696945b6] {\n  outline: 3px solid #5D3EBD;\n  outline-offset: 5px;\n  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.36), -2px -2px 4px 0 rgba(0, 0, 0, 0.14);\n}\n.filterContainer .restaurantsContainer[data-v-696945b6] {\n  min-height: 300px;\n}\n.filterContainer .restaurantsContainer .restaurant[data-v-696945b6] {\n  border-radius: 5px;\n}\n.filterContainer .restaurantsContainer .restaurant img[data-v-696945b6] {\n  width: 100%;\n  height: 100px;\n  border-radius: 5px 5px 0 0;\n}\n.filterContainer .restaurantsContainer a[data-v-696945b6] {\n  color: black;\n}\n.filterContainer .restaurantsContainer a[data-v-696945b6]:hover {\n  text-decoration: none;\n}", ""]);
 
 // exports
 

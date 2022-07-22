@@ -20,7 +20,10 @@
                 <div class="checkbox col-lg-2 col-sm-4 col-6" v-for="(type, index) in allTypes" :key="type.id">
             
                     <input class="filterCheckboxes" type="checkbox" :id="type.name" name="typeCheckbox" :value="type.slug" v-on:click="filter">
-                    <label :for="type.name"> <img class="banner" :src="`/img/types/${images[index].name}`"></label>
+                    <label :for="type.name"> 
+                        <img class="banner" :src="`/img/types/${images[index].src}`">
+                        <span>{{images[index].name}}</span>
+                    </label>
 
                 </div>
             </div>
@@ -56,15 +59,42 @@ export default {
 
             checkedFilters: [],
             images: [
-                {name: 'ristorante-italiano.jpg'},
-                {name: 'pizzeria.jpg'},
-                {name: 'kebab.jpg'},
-                {name: 'fastfood.jpg'},
-                {name: 'ristorante-giapponese.jpg'},
-                {name: 'ristorante-cinese.jpg'},
-                {name: 'sushi.jpg'},
-                {name: 'vegetariano.jpg'},
-                {name: 'vegano.jpg'},
+                {
+                    src: 'ristorante-italiano.jpg',
+                    name: 'Italiano'
+                },
+                {
+                    src: 'pizzeria.jpg',
+                    name: 'Pizzeria'
+                    },
+                {
+                    src: 'kebab.jpg',
+                    name: 'Kebab'
+                },
+                {
+                    src: 'fastfood.jpg',
+                    name: 'Fast Food'
+                },
+                {
+                    src: 'ristorante-giapponese.jpg',
+                    name: 'Giapponese'
+                },
+                {
+                    src: 'ristorante-cinese.jpg',
+                    name: 'Cinese'
+                },
+                {
+                    src: 'sushi.jpg',
+                    name: 'Sushi'
+                },
+                {
+                    src: 'vegetariano.jpg',
+                    name: 'Vegetariano'
+                },
+                {
+                    src: 'vegano.jpg',
+                    name: 'Vegano'
+                },
             ],
             votes: [
                 {
@@ -240,21 +270,33 @@ export default {
             
             .checkbox {
                 label {
-                    border: 3px solid transparent;
                     border-radius: 20px;
+                    display: flex;
+                    flex-flow: column nowrap;
+                    align-items: center;
+                    margin: 10px;
+                    cursor: pointer;
+                    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 10%);
                     
                     img {
-                    width: 150px;
-                    height: 100px;
-                    padding: 5px;
-                    border-radius: 20px;
+                    width: 100%;
+                    height: 120px;
+                    border-radius: 20px 20px 0 0;                   
+                    }
+                    span {
+                        margin: 5px 0;
+                    }
                 }
+                label:hover{
+                    box-shadow: 0 2px 8px 0 rgb(0 0 0 / 36%), -2px -2px 4px 0 rgb(0 0 0 / 14%);
                 }
                 input {
                     display: none;
                 }
                 :checked + label {
-                    border: 3px solid rgb(161, 27, 250);
+                    outline: 3px solid $primary;
+                    outline-offset: 5px;
+                    box-shadow: 0 2px 8px 0 rgb(0 0 0 / 36%), -2px -2px 4px 0 rgb(0 0 0 / 14%);
                 }
             }
         }
