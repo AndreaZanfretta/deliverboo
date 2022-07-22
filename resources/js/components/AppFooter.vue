@@ -108,6 +108,9 @@ export default {
                     li {
                         cursor: pointer;
                     }
+                    li:hover {
+                        color: $secondary;
+                    }
                 }
                 }  
             }
@@ -118,7 +121,4 @@ export default {
                 padding: 10px 0;
             }
         }
-        ul {
-        
-    }
 </style>

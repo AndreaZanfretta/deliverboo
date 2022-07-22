@@ -2377,7 +2377,7 @@ var staticRenderFns = [function () {
   }, [_c("li", {
     staticClass: "nav-item"
   }, [_c("a", {
-    staticClass: "nav-link",
+    staticClass: "nav-link login",
     attrs: {
       href: "/login"
     }
@@ -2458,7 +2458,7 @@ var render = function render() {
 
   return _c("main", [_vm._m(0), _vm._v(" "), _c("div", {
     staticClass: "filterContainer container"
-  }, [_c("div", {
+  }, [_c("h2", [_vm._v("Cosa ti va oggi?")]), _vm._v(" "), _c("div", {
     staticClass: "checkboxesContainer row"
   }, _vm._l(_vm.allTypes, function (type, index) {
     return _c("div", {
@@ -2487,12 +2487,12 @@ var render = function render() {
         src: "/img/types/".concat(_vm.images[index].src)
       }
     }), _vm._v(" "), _c("span", [_vm._v(_vm._s(_vm.images[index].name))])])]);
-  }), 0), _vm._v(" "), _c("div", {
-    staticClass: "restaurantsContainer row"
-  }, _vm._l(_vm.restaurantsList, function (restaurant) {
+  }), 0), _vm._v(" "), _c("h2", [_vm._v("Scegli tra i nostri migliori ristoranti!")]), _vm._v(" "), _c("div", {
+    staticClass: "restaurantsContainer row align-items-start"
+  }, [_vm._l(_vm.restaurantsList, function (restaurant) {
     return _c("div", {
       key: restaurant.id,
-      staticClass: "restaurant col-lg-2 col-sm-4 col-6"
+      staticClass: "restaurant col-lg col-sm-4 col-6"
     }, [_c("router-link", {
       attrs: {
         to: {
@@ -2502,14 +2502,23 @@ var render = function render() {
           }
         }
       }
+    }, [_c("div", {
+      staticClass: "content"
     }, [_c("img", {
       attrs: {
         src: "/storage/".concat(restaurant.image),
         onerror: "this.src='/img/placeholders/placeholder-banner.jpeg';",
         alt: restaurant.slug
       }
-    }), _vm._v(" "), _c("h3", [_vm._v(_vm._s(restaurant.name))]), _vm._v(" "), _c("span", [_vm._v("Consegna gratuita")]), _vm._v(" "), _c("span", [_vm._v("voto: " + _vm._s(_vm.votes[restaurant.vote].name))])])], 1);
-  }), 0)])]);
+    }), _vm._v(" "), _c("h3", [_vm._v(_vm._s(restaurant.name))]), _vm._v(" "), _c("span", [_vm._v("Consegna gratuita")]), _vm._v(" "), _c("span", [_vm._v("Voto: " + _vm._s(restaurant.vote) + "/5 - " + _vm._s(_vm.votes[restaurant.vote].name))])])])], 1);
+  }), _vm._v(" "), _vm.restaurantsList.length < 1 ? _c("div", {
+    staticClass: "noRestaurants"
+  }, [_c("img", {
+    attrs: {
+      src: "/img/placeholders/sad-ghost.png",
+      alt: "Fantasma triste"
+    }
+  }), _vm._v(" "), _c("h3", [_vm._v("Ci dispiace! Non sembra esserci nessun ristorante disponibile!")])]) : _vm._e()], 2)])]);
 };
 
 var staticRenderFns = [function () {
@@ -7004,7 +7013,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "*[data-v-4ab6097e] {\n  box-sizing: border-box;\n  padding: 0;\n  margin: 0;\n}\n.container[data-v-4ab6097e] {\n  margin: 0 auto;\n}\nfooter[data-v-4ab6097e] {\n  background-color: #36246b;\n  color: #fff;\n}\nfooter .listContainer[data-v-4ab6097e] {\n  padding: 50px 0;\n}\nfooter .listContainer .content[data-v-4ab6097e] {\n  background-color: #5D3EBD;\n  margin: 10px;\n  padding: 25px;\n  min-height: 250px;\n  border-radius: 5px;\n}\nfooter .listContainer .content ul[data-v-4ab6097e] {\n  list-style: none;\n}\nfooter .listContainer .content ul li[data-v-4ab6097e] {\n  cursor: pointer;\n}\n.fourth img[data-v-4ab6097e] {\n  width: 150px;\n  padding: 10px 0;\n}", ""]);
+exports.push([module.i, "*[data-v-4ab6097e] {\n  box-sizing: border-box;\n  padding: 0;\n  margin: 0;\n}\n.container[data-v-4ab6097e] {\n  margin: 0 auto;\n}\nfooter[data-v-4ab6097e] {\n  background-color: #36246b;\n  color: #fff;\n}\nfooter .listContainer[data-v-4ab6097e] {\n  padding: 50px 0;\n}\nfooter .listContainer .content[data-v-4ab6097e] {\n  background-color: #5D3EBD;\n  margin: 10px;\n  padding: 25px;\n  min-height: 250px;\n  border-radius: 5px;\n}\nfooter .listContainer .content ul[data-v-4ab6097e] {\n  list-style: none;\n}\nfooter .listContainer .content ul li[data-v-4ab6097e] {\n  cursor: pointer;\n}\nfooter .listContainer .content ul li[data-v-4ab6097e]:hover {\n  color: #D8A963;\n}\n.fourth img[data-v-4ab6097e] {\n  width: 150px;\n  padding: 10px 0;\n}", ""]);
 
 // exports
 
@@ -7023,7 +7032,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "*[data-v-0851419a] {\n  box-sizing: border-box;\n  padding: 0;\n  margin: 0;\n}\n.container[data-v-0851419a] {\n  margin: 0 auto;\n}\nheader[data-v-0851419a] {\n  width: 100%;\n  position: absolute;\n}\nheader .myContainer[data-v-0851419a] {\n  padding-top: 10px;\n}\nheader a[data-v-0851419a] {\n  color: white;\n  font-weight: bolder;\n}", ""]);
+exports.push([module.i, "*[data-v-0851419a] {\n  box-sizing: border-box;\n  padding: 0;\n  margin: 0;\n}\n.container[data-v-0851419a] {\n  margin: 0 auto;\n}\nheader[data-v-0851419a] {\n  width: 100%;\n  position: absolute;\n}\nheader .myContainer[data-v-0851419a] {\n  padding-top: 10px;\n}\nheader a[data-v-0851419a] {\n  color: white;\n  font-weight: bolder;\n}\nheader .login[data-v-0851419a] {\n  font-size: 1.5em;\n}", ""]);
 
 // exports
 
@@ -7042,7 +7051,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "*[data-v-696945b6] {\n  box-sizing: border-box;\n  padding: 0;\n  margin: 0;\n}\n.container[data-v-696945b6] {\n  margin: 0 auto;\n}\n.bannerContainer[data-v-696945b6] {\n  height: 600px;\n  width: 100%;\n  text-align: center;\n  -o-object-fit: contain;\n     object-fit: contain;\n  background-image: url(\"/img/banner/home-banner.jpg\");\n}\n.bannerContainer .filter[data-v-696945b6] {\n  display: flex;\n  justify-content: center;\n  align-items: flex-end;\n  width: 100%;\n  height: 100%;\n  background: linear-gradient(to top, transparent, rgba(0, 0, 0, 0.678));\n}\n.bannerContainer .filter .textContainer[data-v-696945b6] {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  background-color: white;\n  border-radius: 15px;\n  margin-bottom: 50px;\n  width: 30%;\n}\n.bannerContainer .filter .textContainer h2[data-v-696945b6] {\n  color: rgb(140, 31, 243);\n  padding: 25px 50px;\n}\n.filterContainer[data-v-696945b6] {\n  padding-top: 50px;\n}\n.filterContainer .checkboxesContainer .checkbox label[data-v-696945b6] {\n  border-radius: 20px;\n  display: flex;\n  flex-flow: column nowrap;\n  align-items: center;\n  margin: 10px;\n  cursor: pointer;\n  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);\n}\n.filterContainer .checkboxesContainer .checkbox label img[data-v-696945b6] {\n  width: 100%;\n  height: 120px;\n  border-radius: 20px 20px 0 0;\n}\n.filterContainer .checkboxesContainer .checkbox label span[data-v-696945b6] {\n  margin: 5px 0;\n}\n.filterContainer .checkboxesContainer .checkbox label[data-v-696945b6]:hover {\n  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.36), -2px -2px 4px 0 rgba(0, 0, 0, 0.14);\n}\n.filterContainer .checkboxesContainer .checkbox input[data-v-696945b6] {\n  display: none;\n}\n.filterContainer .checkboxesContainer .checkbox :checked + label[data-v-696945b6] {\n  outline: 3px solid #5D3EBD;\n  outline-offset: 5px;\n  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.36), -2px -2px 4px 0 rgba(0, 0, 0, 0.14);\n}\n.filterContainer .restaurantsContainer[data-v-696945b6] {\n  min-height: 300px;\n}\n.filterContainer .restaurantsContainer .restaurant[data-v-696945b6] {\n  border-radius: 5px;\n}\n.filterContainer .restaurantsContainer .restaurant img[data-v-696945b6] {\n  width: 100%;\n  height: 100px;\n  border-radius: 5px 5px 0 0;\n}\n.filterContainer .restaurantsContainer a[data-v-696945b6] {\n  color: black;\n}\n.filterContainer .restaurantsContainer a[data-v-696945b6]:hover {\n  text-decoration: none;\n}", ""]);
+exports.push([module.i, "*[data-v-696945b6] {\n  box-sizing: border-box;\n  padding: 0;\n  margin: 0;\n}\n.container[data-v-696945b6] {\n  margin: 0 auto;\n}\n.bannerContainer[data-v-696945b6] {\n  height: 600px;\n  width: 100%;\n  text-align: center;\n  -o-object-fit: contain;\n     object-fit: contain;\n  background-image: url(\"/img/banner/home-banner.jpg\");\n}\n.bannerContainer .filter[data-v-696945b6] {\n  display: flex;\n  justify-content: center;\n  align-items: flex-end;\n  width: 100%;\n  height: 100%;\n  background: linear-gradient(to top, transparent, rgba(0, 0, 0, 0.678));\n}\n.bannerContainer .filter .textContainer[data-v-696945b6] {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  background-color: white;\n  border-radius: 15px;\n  margin-bottom: 50px;\n  width: 30%;\n}\n.bannerContainer .filter .textContainer h2[data-v-696945b6] {\n  color: rgb(140, 31, 243);\n  padding: 25px 50px;\n}\n.filterContainer[data-v-696945b6] {\n  padding-top: 50px;\n}\n.filterContainer .checkboxesContainer[data-v-696945b6] {\n  padding-bottom: 50px;\n}\n.filterContainer .checkboxesContainer .checkbox label[data-v-696945b6] {\n  border-radius: 20px;\n  display: flex;\n  flex-flow: column nowrap;\n  align-items: center;\n  margin: 10px;\n  cursor: pointer;\n  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);\n}\n.filterContainer .checkboxesContainer .checkbox label img[data-v-696945b6] {\n  width: 100%;\n  height: 120px;\n  border-radius: 20px 20px 0 0;\n}\n.filterContainer .checkboxesContainer .checkbox label span[data-v-696945b6] {\n  margin: 5px 0;\n}\n.filterContainer .checkboxesContainer .checkbox label[data-v-696945b6]:hover {\n  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.36), -2px -2px 4px 0 rgba(0, 0, 0, 0.14);\n}\n.filterContainer .checkboxesContainer .checkbox input[data-v-696945b6] {\n  display: none;\n}\n.filterContainer .checkboxesContainer .checkbox :checked + label[data-v-696945b6] {\n  outline: 3px solid #5D3EBD;\n  outline-offset: 5px;\n  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.36), -2px -2px 4px 0 rgba(0, 0, 0, 0.14);\n}\n.filterContainer .restaurantsContainer[data-v-696945b6] {\n  min-height: 300px;\n}\n.filterContainer .restaurantsContainer .restaurant[data-v-696945b6] {\n  border-radius: 15px;\n  margin: 10px;\n  max-width: 200px;\n  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);\n}\n.filterContainer .restaurantsContainer .restaurant .content[data-v-696945b6] {\n  display: flex;\n  flex-flow: column nowrap;\n}\n.filterContainer .restaurantsContainer .restaurant .content img[data-v-696945b6] {\n  width: 100%;\n  height: 120px;\n  border-radius: 15px 15px 0 0;\n}\n.filterContainer .restaurantsContainer .restaurant .content h3[data-v-696945b6] {\n  text-transform: capitalize;\n  padding: 3px 0 3px 5px;\n}\n.filterContainer .restaurantsContainer .restaurant .content span[data-v-696945b6] {\n  padding: 1px 0 0px 5px;\n}\n.filterContainer .restaurantsContainer .restaurant[data-v-696945b6]:hover {\n  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.36), -2px -2px 4px 0 rgba(0, 0, 0, 0.14);\n}\n.filterContainer .restaurantsContainer a[data-v-696945b6] {\n  color: #141012;\n}\n.filterContainer .restaurantsContainer a[data-v-696945b6]:hover {\n  text-decoration: none;\n}\n.filterContainer .restaurantsContainer .noRestaurants[data-v-696945b6] {\n  width: 100%;\n  display: flex;\n  justify-content: space-around;\n  align-items: center;\n}\n.filterContainer .restaurantsContainer .noRestaurants img[data-v-696945b6] {\n  width: 200px;\n}", ""]);
 
 // exports
 

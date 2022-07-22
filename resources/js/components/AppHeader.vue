@@ -16,7 +16,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="/login">Area ristoratori</a>
+                            <a class="nav-link login" href="/login">Area ristoratori</a>
                         </li>
                     </ul>
                 </div>
@@ -60,6 +60,9 @@ export default {
         a {
             color: white;
             font-weight: bolder;
+        }
+        .login {
+            font-size: 1.5em;
         }
     }
 </style>

@@ -8,14 +8,14 @@
                     <p>Ordina comodamente online da casa tua, i tuoi ristoranti preferiti ti aspettano</p>
                 </div>
             </div>
-            <!-- <img class="banner" src="/img/banner/home-banner.jpg"> -->
             
         </div>
 
-        <!-- CHECKBOXES -->
+        <!-- CHECKBOXES  AND RESTAURANTS-->
 
         <div class="filterContainer container">
-            <!-- POSSIBILE FUTURO CAROUSEL SE ABBIAMO TEMPO -->
+            <h2>Cosa ti va oggi?</h2>
+            <!-- POSSIBILE FUTURO CAROUSEL CHECKBOX SE ABBIAMO TEMPO -->
             <div class="checkboxesContainer row">
                 <div class="checkbox col-lg-2 col-sm-4 col-6" v-for="(type, index) in allTypes" :key="type.id">
             
@@ -27,22 +27,26 @@
 
                 </div>
             </div>
-            <div class="restaurantsContainer row">
-                <div class="restaurant col-lg-2 col-sm-4 col-6" v-for="restaurant in restaurantsList" :key="restaurant.id">
+            <!-- RISTORANTI -->
+            <h2>Scegli tra i nostri migliori ristoranti!</h2>
+            <div class="restaurantsContainer row align-items-start">
+                <div class="restaurant col-lg col-sm-4 col-6" v-for="restaurant in restaurantsList" :key="restaurant.id">
                     <router-link :to="{ name: 'menu', params: { slug: restaurant.slug  } }" >
-                        <img :src="`/storage/${restaurant.image}`" onerror="this.src='/img/placeholders/placeholder-banner.jpeg';" :alt="restaurant.slug">
-                        <h3>{{restaurant.name}}</h3>
-                        <span>Consegna gratuita</span>
-                        <span>voto: {{votes[restaurant.vote].name}}</span>
+                        <div class="content">
+                            <img :src="`/storage/${restaurant.image}`" onerror="this.src='/img/placeholders/placeholder-banner.jpeg';" :alt="restaurant.slug">
+                            <h3>{{restaurant.name}}</h3>
+                            <span>Consegna gratuita</span>
+                            <span>Voto: {{restaurant.vote}}/5 - {{votes[restaurant.vote].name}}</span>
+                        </div>
                     </router-link>
-
+                    
+                    
+                </div>
+                <div class="noRestaurants" v-if="restaurantsList.length < 1">
+                        <img src="/img/placeholders/sad-ghost.png" alt="Fantasma triste">
+                        <h3>Ci dispiace! Non sembra esserci nessun ristorante disponibile!</h3>
                 </div>
             </div>
-            <!-- <ul>
-                <li v-for="restaurant in restaurantsList" :key="restaurant.id">
-                    <router-link :to="{ name: 'menu', params: { slug: restaurant.slug  } }">{{restaurant.name}}</router-link>
-                </li>
-            </ul> -->
         </div>
     </main>
 </template>
@@ -266,8 +270,9 @@ export default {
     
     .filterContainer {
         padding-top: 50px;
+        
         .checkboxesContainer {
-            
+            padding-bottom: 50px;
             .checkbox {
                 label {
                     border-radius: 20px;
@@ -303,20 +308,51 @@ export default {
 
         .restaurantsContainer {
             min-height: 300px;
+            
             .restaurant {
-                border-radius: 5px;
-                img {
-                    width: 100%;
-                    height: 100px;
-                    border-radius: 5px 5px 0 0;
+                border-radius: 15px;
+                margin: 10px;
+                max-width: 200px;
+                box-shadow: 0 2px 4px 0 rgb(0 0 0 / 10%);
 
+                
+                .content {
+                    display: flex;
+                    flex-flow: column nowrap;
+                    
+                    img {
+                        width: 100%;
+                        height: 120px;
+                        border-radius: 15px 15px 0 0;
+
+                    }
+                    h3 {
+                        text-transform: capitalize;
+                        padding: 3px 0 3px 5px;
+                    }
+                    span{
+                        padding: 1px 0 0px 5px;
+                    }
                 }
+                
+            }
+            .restaurant:hover {
+                box-shadow: 0 2px 8px 0 rgb(0 0 0 / 36%), -2px -2px 4px 0 rgb(0 0 0 / 14%);
             }
             a {
-                color: black;
+                color: $black;
             }
             a:hover {
                 text-decoration: none;
+            }
+            .noRestaurants {
+                width: 100%;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                img{
+                    width: 200px;
+                }
             }
         }
     }
