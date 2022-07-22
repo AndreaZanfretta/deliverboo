@@ -42,11 +42,13 @@
                     
                     
                 </div>
-                <div class="noRestaurants" v-if="restaurantsList.length < 1">
+                <div class="noRestaurants" v-if="isEmpty">
                         <img src="/img/placeholders/sad-ghost.png" alt="Fantasma triste">
                         <h3>Ci dispiace! Non sembra esserci nessun ristorante disponibile!</h3>
                 </div>
+                <span class="loader" v-if="loading"></span>
             </div>
+            
         </div>
     </main>
 </template>
@@ -60,7 +62,8 @@ export default {
             filteredTypes: [],
             filteredSlugs: [],
             restaurantsList: [],
-
+            loading: false,
+            isEmpty: true,
             checkedFilters: [],
             images: [
                 {
@@ -149,6 +152,7 @@ export default {
     },
     methods:{
         filter(){
+            this.loading = true;
             this.restaurantsList = [];
             this.restaurantsVote = [];
             var array = [];
@@ -185,7 +189,13 @@ export default {
                         }
                     })
                     this.assignVotes();
-                    
+                    if(this.restaurantsList.length == 0){
+                        this.isEmpty = true;
+                    }
+                    else {
+                        this.isEmpty = false;
+                    }
+                    this.loading = false;
 
 
 
@@ -196,9 +206,10 @@ export default {
                     /* this.$router.push({name: 'page-404'}); */
                 })
             })}
-
+            
         },
         getFullRestaurants(){
+            this.loading = true;
             axios.get('/api/menu')
             .then(res => {
                 this.restaurantsList = res.data;
@@ -209,7 +220,15 @@ export default {
                 }
                 console.log(this.restaurantsVote)
                 //console.log(this.restaurantsList)
+                this.loading = false;
+                if(this.restaurantsList.length == 0){
+                        this.isEmpty = true;
+                    }
+                    else {
+                        this.isEmpty = false;
+                    }
             })
+            
             .catch(err => {
                 console.error(err); 
             })
@@ -308,12 +327,14 @@ export default {
 
         .restaurantsContainer {
             min-height: 300px;
+            position: relative;
             
             .restaurant {
                 border-radius: 15px;
                 margin: 10px;
                 max-width: 200px;
                 box-shadow: 0 2px 4px 0 rgb(0 0 0 / 10%);
+                
 
                 
                 .content {
@@ -355,5 +376,41 @@ export default {
                 }
             }
         }
+        .loader {
+            position: absolute;
+            top: 25%;
+            left: 50%;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: inline-block;
+            border-top: 4px solid $primary;
+            border-right: 4px solid transparent;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+        }
+        .loader::after {
+        content: '';  
+        box-sizing: border-box;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        border-left: 4px solid $secondary;
+        border-bottom: 4px solid transparent;
+        animation: rotation 0.5s linear infinite reverse;
+        }
+        @keyframes rotation {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+        } 
+            
+        
     }
 </style>

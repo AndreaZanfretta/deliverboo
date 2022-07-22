@@ -1999,6 +1999,8 @@ __webpack_require__.r(__webpack_exports__);
       filteredTypes: [],
       filteredSlugs: [],
       restaurantsList: [],
+      loading: false,
+      isEmpty: true,
       checkedFilters: [],
       images: [{
         src: 'ristorante-italiano.jpg',
@@ -2066,6 +2068,7 @@ __webpack_require__.r(__webpack_exports__);
     filter: function filter() {
       var _this2 = this;
 
+      this.loading = true;
       this.restaurantsList = [];
       this.restaurantsVote = [];
       var array = [];
@@ -2105,6 +2108,14 @@ __webpack_require__.r(__webpack_exports__);
             });
 
             _this2.assignVotes();
+
+            if (_this2.restaurantsList.length == 0) {
+              _this2.isEmpty = true;
+            } else {
+              _this2.isEmpty = false;
+            }
+
+            _this2.loading = false;
           })["catch"](function (error) {
             // handle error
             console.log(error);
@@ -2116,6 +2127,7 @@ __webpack_require__.r(__webpack_exports__);
     getFullRestaurants: function getFullRestaurants() {
       var _this3 = this;
 
+      this.loading = true;
       axios.get('/api/menu').then(function (res) {
         _this3.restaurantsList = res.data;
 
@@ -2126,6 +2138,14 @@ __webpack_require__.r(__webpack_exports__);
         }
 
         console.log(_this3.restaurantsVote); //console.log(this.restaurantsList)
+
+        _this3.loading = false;
+
+        if (_this3.restaurantsList.length == 0) {
+          _this3.isEmpty = true;
+        } else {
+          _this3.isEmpty = false;
+        }
       })["catch"](function (err) {
         console.error(err);
       });
@@ -2511,14 +2531,16 @@ var render = function render() {
         alt: restaurant.slug
       }
     }), _vm._v(" "), _c("h3", [_vm._v(_vm._s(restaurant.name))]), _vm._v(" "), _c("span", [_vm._v("Consegna gratuita")]), _vm._v(" "), _c("span", [_vm._v("Voto: " + _vm._s(restaurant.vote) + "/5 - " + _vm._s(_vm.votes[restaurant.vote].name))])])])], 1);
-  }), _vm._v(" "), _vm.restaurantsList.length < 1 ? _c("div", {
+  }), _vm._v(" "), _vm.isEmpty ? _c("div", {
     staticClass: "noRestaurants"
   }, [_c("img", {
     attrs: {
       src: "/img/placeholders/sad-ghost.png",
       alt: "Fantasma triste"
     }
-  }), _vm._v(" "), _c("h3", [_vm._v("Ci dispiace! Non sembra esserci nessun ristorante disponibile!")])]) : _vm._e()], 2)])]);
+  }), _vm._v(" "), _c("h3", [_vm._v("Ci dispiace! Non sembra esserci nessun ristorante disponibile!")])]) : _vm._e(), _vm._v(" "), _vm.loading ? _c("span", {
+    staticClass: "loader"
+  }) : _vm._e()], 2)])]);
 };
 
 var staticRenderFns = [function () {
@@ -7051,7 +7073,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "*[data-v-696945b6] {\n  box-sizing: border-box;\n  padding: 0;\n  margin: 0;\n}\n.container[data-v-696945b6] {\n  margin: 0 auto;\n}\n.bannerContainer[data-v-696945b6] {\n  height: 600px;\n  width: 100%;\n  text-align: center;\n  -o-object-fit: contain;\n     object-fit: contain;\n  background-image: url(\"/img/banner/home-banner.jpg\");\n}\n.bannerContainer .filter[data-v-696945b6] {\n  display: flex;\n  justify-content: center;\n  align-items: flex-end;\n  width: 100%;\n  height: 100%;\n  background: linear-gradient(to top, transparent, rgba(0, 0, 0, 0.678));\n}\n.bannerContainer .filter .textContainer[data-v-696945b6] {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  background-color: white;\n  border-radius: 15px;\n  margin-bottom: 50px;\n  width: 30%;\n}\n.bannerContainer .filter .textContainer h2[data-v-696945b6] {\n  color: rgb(140, 31, 243);\n  padding: 25px 50px;\n}\n.filterContainer[data-v-696945b6] {\n  padding-top: 50px;\n}\n.filterContainer .checkboxesContainer[data-v-696945b6] {\n  padding-bottom: 50px;\n}\n.filterContainer .checkboxesContainer .checkbox label[data-v-696945b6] {\n  border-radius: 20px;\n  display: flex;\n  flex-flow: column nowrap;\n  align-items: center;\n  margin: 10px;\n  cursor: pointer;\n  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);\n}\n.filterContainer .checkboxesContainer .checkbox label img[data-v-696945b6] {\n  width: 100%;\n  height: 120px;\n  border-radius: 20px 20px 0 0;\n}\n.filterContainer .checkboxesContainer .checkbox label span[data-v-696945b6] {\n  margin: 5px 0;\n}\n.filterContainer .checkboxesContainer .checkbox label[data-v-696945b6]:hover {\n  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.36), -2px -2px 4px 0 rgba(0, 0, 0, 0.14);\n}\n.filterContainer .checkboxesContainer .checkbox input[data-v-696945b6] {\n  display: none;\n}\n.filterContainer .checkboxesContainer .checkbox :checked + label[data-v-696945b6] {\n  outline: 3px solid #5D3EBD;\n  outline-offset: 5px;\n  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.36), -2px -2px 4px 0 rgba(0, 0, 0, 0.14);\n}\n.filterContainer .restaurantsContainer[data-v-696945b6] {\n  min-height: 300px;\n}\n.filterContainer .restaurantsContainer .restaurant[data-v-696945b6] {\n  border-radius: 15px;\n  margin: 10px;\n  max-width: 200px;\n  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);\n}\n.filterContainer .restaurantsContainer .restaurant .content[data-v-696945b6] {\n  display: flex;\n  flex-flow: column nowrap;\n}\n.filterContainer .restaurantsContainer .restaurant .content img[data-v-696945b6] {\n  width: 100%;\n  height: 120px;\n  border-radius: 15px 15px 0 0;\n}\n.filterContainer .restaurantsContainer .restaurant .content h3[data-v-696945b6] {\n  text-transform: capitalize;\n  padding: 3px 0 3px 5px;\n}\n.filterContainer .restaurantsContainer .restaurant .content span[data-v-696945b6] {\n  padding: 1px 0 0px 5px;\n}\n.filterContainer .restaurantsContainer .restaurant[data-v-696945b6]:hover {\n  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.36), -2px -2px 4px 0 rgba(0, 0, 0, 0.14);\n}\n.filterContainer .restaurantsContainer a[data-v-696945b6] {\n  color: #141012;\n}\n.filterContainer .restaurantsContainer a[data-v-696945b6]:hover {\n  text-decoration: none;\n}\n.filterContainer .restaurantsContainer .noRestaurants[data-v-696945b6] {\n  width: 100%;\n  display: flex;\n  justify-content: space-around;\n  align-items: center;\n}\n.filterContainer .restaurantsContainer .noRestaurants img[data-v-696945b6] {\n  width: 200px;\n}", ""]);
+exports.push([module.i, "*[data-v-696945b6] {\n  box-sizing: border-box;\n  padding: 0;\n  margin: 0;\n}\n.container[data-v-696945b6] {\n  margin: 0 auto;\n}\n.bannerContainer[data-v-696945b6] {\n  height: 600px;\n  width: 100%;\n  text-align: center;\n  -o-object-fit: contain;\n     object-fit: contain;\n  background-image: url(\"/img/banner/home-banner.jpg\");\n}\n.bannerContainer .filter[data-v-696945b6] {\n  display: flex;\n  justify-content: center;\n  align-items: flex-end;\n  width: 100%;\n  height: 100%;\n  background: linear-gradient(to top, transparent, rgba(0, 0, 0, 0.678));\n}\n.bannerContainer .filter .textContainer[data-v-696945b6] {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  background-color: white;\n  border-radius: 15px;\n  margin-bottom: 50px;\n  width: 30%;\n}\n.bannerContainer .filter .textContainer h2[data-v-696945b6] {\n  color: rgb(140, 31, 243);\n  padding: 25px 50px;\n}\n.filterContainer[data-v-696945b6] {\n  padding-top: 50px;\n}\n.filterContainer .checkboxesContainer[data-v-696945b6] {\n  padding-bottom: 50px;\n}\n.filterContainer .checkboxesContainer .checkbox label[data-v-696945b6] {\n  border-radius: 20px;\n  display: flex;\n  flex-flow: column nowrap;\n  align-items: center;\n  margin: 10px;\n  cursor: pointer;\n  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);\n}\n.filterContainer .checkboxesContainer .checkbox label img[data-v-696945b6] {\n  width: 100%;\n  height: 120px;\n  border-radius: 20px 20px 0 0;\n}\n.filterContainer .checkboxesContainer .checkbox label span[data-v-696945b6] {\n  margin: 5px 0;\n}\n.filterContainer .checkboxesContainer .checkbox label[data-v-696945b6]:hover {\n  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.36), -2px -2px 4px 0 rgba(0, 0, 0, 0.14);\n}\n.filterContainer .checkboxesContainer .checkbox input[data-v-696945b6] {\n  display: none;\n}\n.filterContainer .checkboxesContainer .checkbox :checked + label[data-v-696945b6] {\n  outline: 3px solid #5D3EBD;\n  outline-offset: 5px;\n  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.36), -2px -2px 4px 0 rgba(0, 0, 0, 0.14);\n}\n.filterContainer .restaurantsContainer[data-v-696945b6] {\n  min-height: 300px;\n  position: relative;\n}\n.filterContainer .restaurantsContainer .restaurant[data-v-696945b6] {\n  border-radius: 15px;\n  margin: 10px;\n  max-width: 200px;\n  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);\n}\n.filterContainer .restaurantsContainer .restaurant .content[data-v-696945b6] {\n  display: flex;\n  flex-flow: column nowrap;\n}\n.filterContainer .restaurantsContainer .restaurant .content img[data-v-696945b6] {\n  width: 100%;\n  height: 120px;\n  border-radius: 15px 15px 0 0;\n}\n.filterContainer .restaurantsContainer .restaurant .content h3[data-v-696945b6] {\n  text-transform: capitalize;\n  padding: 3px 0 3px 5px;\n}\n.filterContainer .restaurantsContainer .restaurant .content span[data-v-696945b6] {\n  padding: 1px 0 0px 5px;\n}\n.filterContainer .restaurantsContainer .restaurant[data-v-696945b6]:hover {\n  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.36), -2px -2px 4px 0 rgba(0, 0, 0, 0.14);\n}\n.filterContainer .restaurantsContainer a[data-v-696945b6] {\n  color: #141012;\n}\n.filterContainer .restaurantsContainer a[data-v-696945b6]:hover {\n  text-decoration: none;\n}\n.filterContainer .restaurantsContainer .noRestaurants[data-v-696945b6] {\n  width: 100%;\n  display: flex;\n  justify-content: space-around;\n  align-items: center;\n}\n.filterContainer .restaurantsContainer .noRestaurants img[data-v-696945b6] {\n  width: 200px;\n}\n.filterContainer .loader[data-v-696945b6] {\n  position: absolute;\n  top: 25%;\n  left: 50%;\n  width: 48px;\n  height: 48px;\n  border-radius: 50%;\n  display: inline-block;\n  border-top: 4px solid #5D3EBD;\n  border-right: 4px solid transparent;\n  box-sizing: border-box;\n  -webkit-animation: rotation-696945b6 1s linear infinite;\n          animation: rotation-696945b6 1s linear infinite;\n}\n.filterContainer .loader[data-v-696945b6]::after {\n  content: \"\";\n  box-sizing: border-box;\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 48px;\n  height: 48px;\n  border-radius: 50%;\n  border-left: 4px solid #D8A963;\n  border-bottom: 4px solid transparent;\n  animation: rotation-696945b6 0.5s linear infinite reverse;\n}\n@-webkit-keyframes rotation-696945b6 {\n0% {\n    transform: rotate(0deg);\n}\n100% {\n    transform: rotate(360deg);\n}\n}\n@keyframes rotation-696945b6 {\n0% {\n    transform: rotate(0deg);\n}\n100% {\n    transform: rotate(360deg);\n}\n}", ""]);
 
 // exports
 
