@@ -6,6 +6,8 @@
                 <div class="textContainer">
                     <h2>Tutto quello che vuoi dove vuoi, per una fame da paura!</h2>
                     <p>Ordina comodamente online da casa tua, i tuoi ristoranti preferiti ti aspettano</p>
+                    <a href="#restaurantList"><button>Vai ai ristoranti</button></a>
+                    
                 </div>
             </div>
             
@@ -30,7 +32,7 @@
             <!-- RISTORANTI -->
             <h2>Scegli tra i nostri migliori ristoranti!</h2>
             <div class="restaurantsContainer row align-items-start">
-                <div class="restaurant col-lg col-sm-4 col-6" v-for="restaurant in restaurantsList" :key="restaurant.id">
+                <div id="restaurantList" class="restaurant col-lg col-sm-4 col-6" v-for="restaurant in restaurantsList" :key="restaurant.id">
                     <router-link :to="{ name: 'menu', params: { slug: restaurant.slug  } }" >
                         <div class="content">
                             <img :src="`/storage/${restaurant.image}`" onerror="this.src='/img/placeholders/placeholder-banner.jpeg';" :alt="restaurant.slug">
@@ -251,7 +253,7 @@ export default {
 <style scoped lang="scss">
 @import '../../sass/variables';
 @import '../../sass/general';
-
+    
     .bannerContainer{
         height: 600px;
         width: 100%;
@@ -276,19 +278,39 @@ export default {
             align-items: center;
             background-color: white;
             border-radius: 15px;
-            margin-bottom: 50px;
             width: 30%;
+            margin-bottom: -50px;
+            box-shadow: 0 2px 8px 0 rgb(0 0 0 / 36%), -2px -2px 4px 0 rgb(0 0 0 / 14%);
+            
             h2 {
-                color: rgb(140, 31, 243);
+                color: $primary;
                 padding: 25px 50px;
-            }  
+                font-weight: bolder;
+                font-size: 2.5em;
+            } 
+            p {
+                font-weight: bolder;
+                font-size: 1em;
+                color: $black;
+                padding-bottom: 15px;
+                color: $light-gray;
+            }
+            button {
+                background-color: $secondary;
+                border: none;
+                font-size: 1.5em;
+                padding: 7px 25px;
+                border-radius: 25px;
+                margin-bottom: 20px;
+                color: $white;
+            } 
         }
         }
         
     }   
     
     .filterContainer {
-        padding-top: 50px;
+        padding-top: 150px;
         
         .checkboxesContainer {
             padding-bottom: 50px;
