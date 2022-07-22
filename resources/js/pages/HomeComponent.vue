@@ -196,6 +196,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '../../sass/variables';
+@import '../../sass/general';
+
     .bannerContainer{
         height: 600px;
         width: 100%;

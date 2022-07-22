@@ -49,9 +49,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '../../sass/variables';
+@import '../../sass/general';
     header {
         width: 100%;
         position: absolute;
+
         a {
             color: white;
             font-weight: bolder;
