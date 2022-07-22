@@ -1999,7 +1999,26 @@ __webpack_require__.r(__webpack_exports__);
       filteredTypes: [],
       filteredSlugs: [],
       restaurantsList: [],
-      checkedFilters: []
+      checkedFilters: [],
+      images: [{
+        name: 'ristorante-italiano.jpg'
+      }, {
+        name: 'pizzeria.jpg'
+      }, {
+        name: 'kebab.jpg'
+      }, {
+        name: 'fastfood.jpg'
+      }, {
+        name: 'ristorante-giapponese.jpg'
+      }, {
+        name: 'ristorante-cinese.jpg'
+      }, {
+        name: 'sushi.jpg'
+      }, {
+        name: 'vegetariano.jpg'
+      }, {
+        name: 'vegano.jpg'
+      }]
     };
   },
   created: function created() {
@@ -2351,9 +2370,14 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("main", [_vm._m(0), _vm._v(" "), _vm._l(_vm.allTypes, function (type) {
+  return _c("main", [_vm._m(0), _vm._v(" "), _c("div", {
+    staticClass: "filterContainer container"
+  }, [_c("div", {
+    staticClass: "checkboxesContainer row"
+  }, _vm._l(_vm.allTypes, function (type, index) {
     return _c("div", {
-      key: type.id
+      key: type.id,
+      staticClass: "checkbox col-lg-2 col-sm-4 col-6"
     }, [_c("input", {
       staticClass: "filterCheckboxes",
       attrs: {
@@ -2371,10 +2395,18 @@ var render = function render() {
       attrs: {
         "for": type.name
       }
-    }, [_vm._v(" " + _vm._s(type.name))])]);
-  }), _vm._v(" "), _c("ul", _vm._l(_vm.restaurantsList, function (restaurant) {
-    return _c("li", {
-      key: restaurant.id
+    }, [_c("img", {
+      staticClass: "banner",
+      attrs: {
+        src: "/img/types/".concat(_vm.images[index].name)
+      }
+    })])]);
+  }), 0), _vm._v(" "), _c("div", {
+    staticClass: "restaurantsContainer row"
+  }, _vm._l(_vm.restaurantsList, function (restaurant) {
+    return _c("div", {
+      key: restaurant.id,
+      staticClass: "restaurant col-lg-2 col-sm-4 col-6"
     }, [_c("router-link", {
       attrs: {
         to: {
@@ -2384,8 +2416,14 @@ var render = function render() {
           }
         }
       }
-    }, [_vm._v(_vm._s(restaurant.name))])], 1);
-  }), 0)], 2);
+    }, [_c("img", {
+      attrs: {
+        src: "/storage/".concat(restaurant.image),
+        onerror: "this.src='/img/placeholders/placeholder-banner.jpeg';",
+        alt: restaurant.slug
+      }
+    }), _vm._v(" "), _c("h3", [_vm._v(_vm._s(restaurant.name))]), _vm._v(" "), _c("span", [_vm._v("Consegna gratuita")])])], 1);
+  }), 0)])]);
 };
 
 var staticRenderFns = [function () {
@@ -2398,7 +2436,7 @@ var staticRenderFns = [function () {
     staticClass: "filter"
   }, [_c("div", {
     staticClass: "textContainer"
-  }, [_c("h2", [_vm._v("Tutto quello che vuoi dove vuoi, per una fame da paura!")]), _vm._v(" "), _c("span", [_vm._v("Ordina comodamente online da casa tua, i tuoi ristoranti preferiti ti aspettano")])])])]);
+  }, [_c("h2", [_vm._v("Tutto quello che vuoi dove vuoi, per una fame da paura!")]), _vm._v(" "), _c("p", [_vm._v("Ordina comodamente online da casa tua, i tuoi ristoranti preferiti ti aspettano")])])])]);
 }];
 render._withStripped = true;
 
@@ -6899,7 +6937,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".bannerContainer[data-v-696945b6] {\n  height: 600px;\n  width: 100%;\n  text-align: center;\n  -o-object-fit: contain;\n     object-fit: contain;\n  background-image: url(\"/img/banner/home-banner.jpg\");\n}\n.bannerContainer .filter[data-v-696945b6] {\n  display: flex;\n  justify-content: center;\n  align-items: flex-end;\n  width: 100%;\n  height: 100%;\n  background: linear-gradient(to top, transparent, rgba(0, 0, 0, 0.678));\n}\n.bannerContainer .filter .textContainer[data-v-696945b6] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: white;\n  border-radius: 15px;\n  margin-bottom: 50px;\n  width: 600px;\n}\n.bannerContainer .filter .textContainer h2[data-v-696945b6] {\n  color: rgb(140, 31, 243);\n  padding: 25px 50px;\n}\n.titleSection[data-v-696945b6] {\n  text-align: center;\n  position: relative;\n  z-index: 1;\n}\n.titleSection h2[data-v-696945b6] {\n  color: white;\n}", ""]);
+exports.push([module.i, ".bannerContainer[data-v-696945b6] {\n  height: 600px;\n  width: 100%;\n  text-align: center;\n  -o-object-fit: contain;\n     object-fit: contain;\n  background-image: url(\"/img/banner/home-banner.jpg\");\n}\n.bannerContainer .filter[data-v-696945b6] {\n  display: flex;\n  justify-content: center;\n  align-items: flex-end;\n  width: 100%;\n  height: 100%;\n  background: linear-gradient(to top, transparent, rgba(0, 0, 0, 0.678));\n}\n.bannerContainer .filter .textContainer[data-v-696945b6] {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  background-color: white;\n  border-radius: 15px;\n  margin-bottom: 50px;\n  width: 30%;\n}\n.bannerContainer .filter .textContainer h2[data-v-696945b6] {\n  color: rgb(140, 31, 243);\n  padding: 25px 50px;\n}\n.filterContainer[data-v-696945b6] {\n  padding-top: 50px;\n}\n.filterContainer .checkboxesContainer .checkbox label[data-v-696945b6] {\n  border: 3px solid transparent;\n  border-radius: 20px;\n}\n.filterContainer .checkboxesContainer .checkbox label img[data-v-696945b6] {\n  width: 150px;\n  height: 100px;\n  padding: 5px;\n  border-radius: 20px;\n}\n.filterContainer .checkboxesContainer .checkbox input[data-v-696945b6] {\n  display: none;\n}\n.filterContainer .checkboxesContainer .checkbox :checked + label[data-v-696945b6] {\n  border: 3px solid rgb(161, 27, 250);\n}\n.filterContainer .restaurantsContainer[data-v-696945b6] {\n  min-height: 300px;\n}\n.filterContainer .restaurantsContainer .restaurant[data-v-696945b6] {\n  border-radius: 5px;\n}\n.filterContainer .restaurantsContainer .restaurant img[data-v-696945b6] {\n  width: 100%;\n  height: 100px;\n  border-radius: 5px 5px 0 0;\n}", ""]);
 
 // exports
 

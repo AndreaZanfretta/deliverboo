@@ -5,7 +5,7 @@
             <div class="filter">
                 <div class="textContainer">
                     <h2>Tutto quello che vuoi dove vuoi, per una fame da paura!</h2>
-                    <span>Ordina comodamente online da casa tua, i tuoi ristoranti preferiti ti aspettano</span>
+                    <p>Ordina comodamente online da casa tua, i tuoi ristoranti preferiti ti aspettano</p>
                 </div>
             </div>
             <!-- <img class="banner" src="/img/banner/home-banner.jpg"> -->
@@ -14,17 +14,32 @@
 
         <!-- CHECKBOXES -->
 
-        <div v-for="(type) in allTypes" :key="type.id">
+        <div class="filterContainer container">
+            <!-- POSSIBILE FUTURO CAROUSEL SE ABBIAMO TEMPO -->
+            <div class="checkboxesContainer row">
+                <div class="checkbox col-lg-2 col-sm-4 col-6" v-for="(type, index) in allTypes" :key="type.id">
             
-            <input class="filterCheckboxes" type="checkbox" :id="type.name" name="typeCheckbox" :value="type.slug" v-on:click="filter">
-            
-            <label :for="type.name"> {{type.name}}</label>
+                    <input class="filterCheckboxes" type="checkbox" :id="type.name" name="typeCheckbox" :value="type.slug" v-on:click="filter">
+                    <label :for="type.name"> <img class="banner" :src="`/img/types/${images[index].name}`"></label>
+
+                </div>
+            </div>
+            <div class="restaurantsContainer row">
+                <div class="restaurant col-lg-2 col-sm-4 col-6" v-for="restaurant in restaurantsList" :key="restaurant.id">
+                    <router-link :to="{ name: 'menu', params: { slug: restaurant.slug  } }">
+                        <img :src="`/storage/${restaurant.image}`" onerror="this.src='/img/placeholders/placeholder-banner.jpeg';" :alt="restaurant.slug">
+                        <h3>{{restaurant.name}}</h3>
+                        <span>Consegna gratuita</span>
+                    </router-link>
+
+                </div>
+            </div>
+            <!-- <ul>
+                <li v-for="restaurant in restaurantsList" :key="restaurant.id">
+                    <router-link :to="{ name: 'menu', params: { slug: restaurant.slug  } }">{{restaurant.name}}</router-link>
+                </li>
+            </ul> -->
         </div>
-        <ul>
-            <li v-for="restaurant in restaurantsList" :key="restaurant.id">
-                <router-link :to="{ name: 'menu', params: { slug: restaurant.slug  } }">{{restaurant.name}}</router-link>
-            </li>
-        </ul>
     </main>
 </template>
 
@@ -39,7 +54,17 @@ export default {
             restaurantsList: [],
 
             checkedFilters: [],
-            
+            images: [
+                {name: 'ristorante-italiano.jpg'},
+                {name: 'pizzeria.jpg'},
+                {name: 'kebab.jpg'},
+                {name: 'fastfood.jpg'},
+                {name: 'ristorante-giapponese.jpg'},
+                {name: 'ristorante-cinese.jpg'},
+                {name: 'sushi.jpg'},
+                {name: 'vegetariano.jpg'},
+                {name: 'vegano.jpg'},
+            ]
             
         }
     },
@@ -135,12 +160,13 @@ export default {
             background: linear-gradient(to top, transparent, rgba(0, 0, 0, 0.678));
         .textContainer {
             display: flex;
+            flex-flow: column nowrap;
             justify-content: center;
             align-items: center;
             background-color: white;
             border-radius: 15px;
             margin-bottom: 50px;
-            width: 600px;
+            width: 30%;
             h2 {
                 color: rgb(140, 31, 243);
                 padding: 25px 50px;
@@ -150,13 +176,42 @@ export default {
         
     }   
     
-    
-    .titleSection {
-        text-align: center;
-        position: relative;
-        z-index: 1;
-        h2 {
-            color: white;
+    .filterContainer {
+        padding-top: 50px;
+        .checkboxesContainer {
+            
+            .checkbox {
+                label {
+                    border: 3px solid transparent;
+                    border-radius: 20px;
+                    
+                    img {
+                    width: 150px;
+                    height: 100px;
+                    padding: 5px;
+                    border-radius: 20px;
+                }
+                }
+                input {
+                    display: none;
+                }
+                :checked + label {
+                    border: 3px solid rgb(161, 27, 250);
+                }
+            }
+        }
+
+        .restaurantsContainer {
+            min-height: 300px;
+            .restaurant {
+                border-radius: 5px;
+                img {
+                    width: 100%;
+                    height: 100px;
+                    border-radius: 5px 5px 0 0;
+
+                }
+            }
         }
     }
 </style>
