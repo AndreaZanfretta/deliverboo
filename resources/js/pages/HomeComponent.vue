@@ -26,10 +26,11 @@
             </div>
             <div class="restaurantsContainer row">
                 <div class="restaurant col-lg-2 col-sm-4 col-6" v-for="restaurant in restaurantsList" :key="restaurant.id">
-                    <router-link :to="{ name: 'menu', params: { slug: restaurant.slug  } }">
+                    <router-link :to="{ name: 'menu', params: { slug: restaurant.slug  } }" >
                         <img :src="`/storage/${restaurant.image}`" onerror="this.src='/img/placeholders/placeholder-banner.jpeg';" :alt="restaurant.slug">
                         <h3>{{restaurant.name}}</h3>
                         <span>Consegna gratuita</span>
+                        <span>voto: {{votes[restaurant.vote].name}}</span>
                     </router-link>
 
                 </div>
@@ -64,7 +65,38 @@ export default {
                 {name: 'sushi.jpg'},
                 {name: 'vegetariano.jpg'},
                 {name: 'vegano.jpg'},
-            ]
+            ],
+            votes: [
+                {
+                    name: 'Nessuna recensione',
+                    value: '0'
+                },
+                {
+                    name: 'boo',
+                    value: '1'
+                },
+                {
+                    name: 'infestabile',
+                    value: '2'
+                },
+                {
+                    name: 'spettrabile',
+                    value: '3'
+                },
+                {
+                    name: 'fantasmagorico',
+                    value: '4'
+                },  
+                {
+                    name: 'ectorgasmico',
+                    value: '5'
+                },
+
+
+                
+
+            ],
+            restaurantsVote: [],
             
         }
     },
@@ -84,6 +116,7 @@ export default {
     methods:{
         filter(){
             this.restaurantsList = [];
+            this.restaurantsVote = [];
             var array = [];
             var checkboxes = document.querySelectorAll('input[type=checkbox]:checked');
             if(checkboxes.length < 1){
@@ -109,11 +142,15 @@ export default {
                         }
                         else {
                             this.restaurantsList.push(value)
+                            let vote = this.randomNum()
+                            this.restaurantsVote.push(vote)
+                            //console.log(this.restaurantsVote)
                             //console.log("aggiunto")
                             //console.log(value)
                             
                         }
                     })
+                    this.assignVotes();
                     
 
 
@@ -125,16 +162,34 @@ export default {
                     /* this.$router.push({name: 'page-404'}); */
                 })
             })}
+
         },
         getFullRestaurants(){
             axios.get('/api/menu')
             .then(res => {
                 this.restaurantsList = res.data;
+                for(let i=0; i<this.restaurantsList.length; i++){
+                    let vote = this.randomNum()
+                    this.restaurantsList[i].vote = vote;
+                    
+                }
+                console.log(this.restaurantsVote)
                 //console.log(this.restaurantsList)
             })
             .catch(err => {
                 console.error(err); 
             })
+            
+        },
+        randomNum(){
+            return Math.floor(Math.random() * 5 + 1);
+        },
+        assignVotes(){
+            for (let i= 0; i<this.restaurantsList.length; i++){
+                console.log(this.restaurantsList)
+                this.restaurantsList[i].vote = (this.restaurantsVote[i])
+            }
+            console.log(this.restaurantsList)
         }
     }
 }
@@ -211,6 +266,12 @@ export default {
                     border-radius: 5px 5px 0 0;
 
                 }
+            }
+            a {
+                color: black;
+            }
+            a:hover {
+                text-decoration: none;
             }
         }
     }

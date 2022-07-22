@@ -2018,7 +2018,27 @@ __webpack_require__.r(__webpack_exports__);
         name: 'vegetariano.jpg'
       }, {
         name: 'vegano.jpg'
-      }]
+      }],
+      votes: [{
+        name: 'Nessuna recensione',
+        value: '0'
+      }, {
+        name: 'boo',
+        value: '1'
+      }, {
+        name: 'infestabile',
+        value: '2'
+      }, {
+        name: 'spettrabile',
+        value: '3'
+      }, {
+        name: 'fantasmagorico',
+        value: '4'
+      }, {
+        name: 'ectorgasmico',
+        value: '5'
+      }],
+      restaurantsVote: []
     };
   },
   created: function created() {
@@ -2038,6 +2058,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       this.restaurantsList = [];
+      this.restaurantsVote = [];
       var array = [];
       var checkboxes = document.querySelectorAll('input[type=checkbox]:checked');
 
@@ -2063,11 +2084,18 @@ __webpack_require__.r(__webpack_exports__);
               }).length > 0) {//console.log("già presente")
                 //console.log(value)
               } else {
-                _this2.restaurantsList.push(value); //console.log("aggiunto")
+                _this2.restaurantsList.push(value);
+
+                var vote = _this2.randomNum();
+
+                _this2.restaurantsVote.push(vote); //console.log(this.restaurantsVote)
+                //console.log("aggiunto")
                 //console.log(value)
 
               }
             });
+
+            _this2.assignVotes();
           })["catch"](function (error) {
             // handle error
             console.log(error);
@@ -2080,10 +2108,29 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       axios.get('/api/menu').then(function (res) {
-        _this3.restaurantsList = res.data; //console.log(this.restaurantsList)
+        _this3.restaurantsList = res.data;
+
+        for (var i = 0; i < _this3.restaurantsList.length; i++) {
+          var vote = _this3.randomNum();
+
+          _this3.restaurantsList[i].vote = vote;
+        }
+
+        console.log(_this3.restaurantsVote); //console.log(this.restaurantsList)
       })["catch"](function (err) {
         console.error(err);
       });
+    },
+    randomNum: function randomNum() {
+      return Math.floor(Math.random() * 5 + 1);
+    },
+    assignVotes: function assignVotes() {
+      for (var i = 0; i < this.restaurantsList.length; i++) {
+        console.log(this.restaurantsList);
+        this.restaurantsList[i].vote = this.restaurantsVote[i];
+      }
+
+      console.log(this.restaurantsList);
     }
   }
 });
@@ -2223,7 +2270,29 @@ var staticRenderFns = [function () {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div", [_c("h1", [_vm._v("footer")])]);
+  return _c("footer", [_c("div", {
+    staticClass: "container"
+  }, [_c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col"
+  }, [_c("h4", [_vm._v("Scopri DeliverBoo")]), _vm._v(" "), _c("ul", [_c("li", [_vm._v("\n                        Chi siamo\n                    ")]), _vm._v(" "), _c("li", [_vm._v("\n                        Ristoranti\n                    ")]), _vm._v(" "), _c("li", [_vm._v("\n                        Altro\n                    ")]), _vm._v(" "), _c("li", [_vm._v("\n                        Design\n                    ")]), _vm._v(" "), _c("li", [_vm._v("\n                        Lavora con noi\n                    ")]), _vm._v(" "), _c("li", [_vm._v("\n                        Diventa partner\n                    ")])])]), _vm._v(" "), _c("div", {
+    staticClass: "col"
+  }, [_c("h4", [_vm._v("Note legali")]), _vm._v(" "), _c("ul", [_c("li", [_vm._v("\n                        Termini & Condizioni\n                    ")]), _vm._v(" "), _c("li", [_vm._v("\n                        Informazioni sulla privacy\n                    ")]), _vm._v(" "), _c("li", [_vm._v("\n                        Cookies\n                    ")])])]), _vm._v(" "), _c("div", {
+    staticClass: "col"
+  }, [_c("h4", [_vm._v("Aiuto")]), _vm._v(" "), _c("ul", [_c("li", [_vm._v("\n                        Contatti\n                    ")]), _vm._v(" "), _c("li", [_vm._v("\n                        FAQ\n                    ")]), _vm._v(" "), _c("li", [_vm._v("\n                        Tipi di cucina\n                    ")])])]), _vm._v(" "), _c("div", {
+    staticClass: "col"
+  }, [_c("h4", [_vm._v("DeliverBoo ti segue sempre")]), _vm._v(" "), _c("img", {
+    attrs: {
+      src: "/img/logo/appstore.png",
+      alt: "Apple Store"
+    }
+  }), _vm._v(" "), _c("img", {
+    attrs: {
+      src: "/img/logo/googleplay.png",
+      alt: "Google Play Store"
+    }
+  })])])])]);
 }];
 render._withStripped = true;
 
@@ -2422,7 +2491,7 @@ var render = function render() {
         onerror: "this.src='/img/placeholders/placeholder-banner.jpeg';",
         alt: restaurant.slug
       }
-    }), _vm._v(" "), _c("h3", [_vm._v(_vm._s(restaurant.name))]), _vm._v(" "), _c("span", [_vm._v("Consegna gratuita")])])], 1);
+    }), _vm._v(" "), _c("h3", [_vm._v(_vm._s(restaurant.name))]), _vm._v(" "), _c("span", [_vm._v("Consegna gratuita")]), _vm._v(" "), _c("span", [_vm._v("voto: " + _vm._s(_vm.votes[restaurant.vote].name))])])], 1);
   }), 0)])]);
 };
 
@@ -6937,7 +7006,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".bannerContainer[data-v-696945b6] {\n  height: 600px;\n  width: 100%;\n  text-align: center;\n  -o-object-fit: contain;\n     object-fit: contain;\n  background-image: url(\"/img/banner/home-banner.jpg\");\n}\n.bannerContainer .filter[data-v-696945b6] {\n  display: flex;\n  justify-content: center;\n  align-items: flex-end;\n  width: 100%;\n  height: 100%;\n  background: linear-gradient(to top, transparent, rgba(0, 0, 0, 0.678));\n}\n.bannerContainer .filter .textContainer[data-v-696945b6] {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  background-color: white;\n  border-radius: 15px;\n  margin-bottom: 50px;\n  width: 30%;\n}\n.bannerContainer .filter .textContainer h2[data-v-696945b6] {\n  color: rgb(140, 31, 243);\n  padding: 25px 50px;\n}\n.filterContainer[data-v-696945b6] {\n  padding-top: 50px;\n}\n.filterContainer .checkboxesContainer .checkbox label[data-v-696945b6] {\n  border: 3px solid transparent;\n  border-radius: 20px;\n}\n.filterContainer .checkboxesContainer .checkbox label img[data-v-696945b6] {\n  width: 150px;\n  height: 100px;\n  padding: 5px;\n  border-radius: 20px;\n}\n.filterContainer .checkboxesContainer .checkbox input[data-v-696945b6] {\n  display: none;\n}\n.filterContainer .checkboxesContainer .checkbox :checked + label[data-v-696945b6] {\n  border: 3px solid rgb(161, 27, 250);\n}\n.filterContainer .restaurantsContainer[data-v-696945b6] {\n  min-height: 300px;\n}\n.filterContainer .restaurantsContainer .restaurant[data-v-696945b6] {\n  border-radius: 5px;\n}\n.filterContainer .restaurantsContainer .restaurant img[data-v-696945b6] {\n  width: 100%;\n  height: 100px;\n  border-radius: 5px 5px 0 0;\n}", ""]);
+exports.push([module.i, ".bannerContainer[data-v-696945b6] {\n  height: 600px;\n  width: 100%;\n  text-align: center;\n  -o-object-fit: contain;\n     object-fit: contain;\n  background-image: url(\"/img/banner/home-banner.jpg\");\n}\n.bannerContainer .filter[data-v-696945b6] {\n  display: flex;\n  justify-content: center;\n  align-items: flex-end;\n  width: 100%;\n  height: 100%;\n  background: linear-gradient(to top, transparent, rgba(0, 0, 0, 0.678));\n}\n.bannerContainer .filter .textContainer[data-v-696945b6] {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  background-color: white;\n  border-radius: 15px;\n  margin-bottom: 50px;\n  width: 30%;\n}\n.bannerContainer .filter .textContainer h2[data-v-696945b6] {\n  color: rgb(140, 31, 243);\n  padding: 25px 50px;\n}\n.filterContainer[data-v-696945b6] {\n  padding-top: 50px;\n}\n.filterContainer .checkboxesContainer .checkbox label[data-v-696945b6] {\n  border: 3px solid transparent;\n  border-radius: 20px;\n}\n.filterContainer .checkboxesContainer .checkbox label img[data-v-696945b6] {\n  width: 150px;\n  height: 100px;\n  padding: 5px;\n  border-radius: 20px;\n}\n.filterContainer .checkboxesContainer .checkbox input[data-v-696945b6] {\n  display: none;\n}\n.filterContainer .checkboxesContainer .checkbox :checked + label[data-v-696945b6] {\n  border: 3px solid rgb(161, 27, 250);\n}\n.filterContainer .restaurantsContainer[data-v-696945b6] {\n  min-height: 300px;\n}\n.filterContainer .restaurantsContainer .restaurant[data-v-696945b6] {\n  border-radius: 5px;\n}\n.filterContainer .restaurantsContainer .restaurant img[data-v-696945b6] {\n  width: 100%;\n  height: 100px;\n  border-radius: 5px 5px 0 0;\n}\n.filterContainer .restaurantsContainer a[data-v-696945b6] {\n  color: black;\n}\n.filterContainer .restaurantsContainer a[data-v-696945b6]:hover {\n  text-decoration: none;\n}", ""]);
 
 // exports
 
