@@ -1,7 +1,7 @@
 <template>
     
     <header >
-        <div class="container">
+        <div class="container myContainer">
             <nav class="navbar navbar-expand-lg">
                 <a class="navbar-brand" href="#">
                     <!-- <img src="/img/logo/deliberboo-delivery-logo.png" class="d-inline-block align-top" alt="Logo" width="30" height="30">
@@ -54,7 +54,9 @@ export default {
     header {
         width: 100%;
         position: absolute;
-
+    .myContainer {
+        padding-top: 10px;
+    }
         a {
             color: white;
             font-weight: bolder;

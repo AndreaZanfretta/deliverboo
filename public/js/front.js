@@ -2273,15 +2273,23 @@ var staticRenderFns = [function () {
   return _c("footer", [_c("div", {
     staticClass: "container"
   }, [_c("div", {
-    staticClass: "row"
+    staticClass: "row g-3"
   }, [_c("div", {
-    staticClass: "col col-lg-3 first"
-  }, [_c("h4", [_vm._v("Scopri DeliverBoo")]), _vm._v(" "), _c("ul", [_c("li", [_vm._v("\n                        Chi siamo\n                    ")]), _vm._v(" "), _c("li", [_vm._v("\n                        Ristoranti\n                    ")]), _vm._v(" "), _c("li", [_vm._v("\n                        Altro\n                    ")]), _vm._v(" "), _c("li", [_vm._v("\n                        Design\n                    ")]), _vm._v(" "), _c("li", [_vm._v("\n                        Lavora con noi\n                    ")]), _vm._v(" "), _c("li", [_vm._v("\n                        Diventa partner\n                    ")])])]), _vm._v(" "), _c("div", {
-    staticClass: "col col-lg-3 second"
-  }, [_c("h4", [_vm._v("Note legali")]), _vm._v(" "), _c("ul", [_c("li", [_vm._v("\n                        Termini & Condizioni\n                    ")]), _vm._v(" "), _c("li", [_vm._v("\n                        Informazioni sulla privacy\n                    ")]), _vm._v(" "), _c("li", [_vm._v("\n                        Cookies\n                    ")])])]), _vm._v(" "), _c("div", {
-    staticClass: "col col-lg-3 third"
-  }, [_c("h4", [_vm._v("Aiuto")]), _vm._v(" "), _c("ul", [_c("li", [_vm._v("\n                        Contatti\n                    ")]), _vm._v(" "), _c("li", [_vm._v("\n                        FAQ\n                    ")]), _vm._v(" "), _c("li", [_vm._v("\n                        Tipi di cucina\n                    ")])])]), _vm._v(" "), _c("div", {
-    staticClass: "col col-lg-3 fourth"
+    staticClass: "col-12 col-sm-6 col-lg-3 listContainer first"
+  }, [_c("div", {
+    staticClass: "content"
+  }, [_c("h4", [_vm._v("Scopri DeliverBoo")]), _vm._v(" "), _c("ul", [_c("li", [_vm._v("\n                            Chi siamo\n                        ")]), _vm._v(" "), _c("li", [_vm._v("\n                            Ristoranti\n                        ")]), _vm._v(" "), _c("li", [_vm._v("\n                            Altro\n                        ")]), _vm._v(" "), _c("li", [_vm._v("\n                            Design\n                        ")]), _vm._v(" "), _c("li", [_vm._v("\n                            Lavora con noi\n                        ")]), _vm._v(" "), _c("li", [_vm._v("\n                            Diventa partner\n                        ")])])])]), _vm._v(" "), _c("div", {
+    staticClass: "col-12 col-sm-6 col-lg-3 listContainer second"
+  }, [_c("div", {
+    staticClass: "content"
+  }, [_c("h4", [_vm._v("Note legali")]), _vm._v(" "), _c("ul", [_c("li", [_vm._v("\n                            Termini & Condizioni\n                        ")]), _vm._v(" "), _c("li", [_vm._v("\n                            Informazioni sulla privacy\n                        ")]), _vm._v(" "), _c("li", [_vm._v("\n                            Cookies\n                        ")])])])]), _vm._v(" "), _c("div", {
+    staticClass: "col-12 col-sm-6 col-lg-3 listContainer third"
+  }, [_c("div", {
+    staticClass: "content"
+  }, [_c("h4", [_vm._v("Aiuto")]), _vm._v(" "), _c("ul", [_c("li", [_vm._v("\n                            Contatti\n                        ")]), _vm._v(" "), _c("li", [_vm._v("\n                            FAQ\n                        ")]), _vm._v(" "), _c("li", [_vm._v("\n                            Tipi di cucina\n                        ")])])])]), _vm._v(" "), _c("div", {
+    staticClass: "col-12 col-sm-6 col-lg-3 listContainer fourth"
+  }, [_c("div", {
+    staticClass: "content"
   }, [_c("h4", [_vm._v("DeliverBoo ti segue sempre")]), _vm._v(" "), _c("img", {
     attrs: {
       src: "/img/logo/appstore.png",
@@ -2292,7 +2300,7 @@ var staticRenderFns = [function () {
       src: "/img/logo/googleplay.png",
       alt: "Google Play Store"
     }
-  })])])])]);
+  })])])])])]);
 }];
 render._withStripped = true;
 
@@ -2322,7 +2330,7 @@ var staticRenderFns = [function () {
       _c = _vm._self._c;
 
   return _c("header", [_c("div", {
-    staticClass: "container"
+    staticClass: "container myContainer"
   }, [_c("nav", {
     staticClass: "navbar navbar-expand-lg"
   }, [_c("a", {
@@ -6987,7 +6995,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "*[data-v-4ab6097e] {\n  box-sizing: border-box;\n  padding: 0;\n  margin: 0;\n}\n.container[data-v-4ab6097e] {\n  margin: 0 auto;\n}\nfooter[data-v-4ab6097e] {\n  background-color: #36246b;\n  color: #fff;\n}\nfooter .col[data-v-4ab6097e] {\n  background-color: #5D3EBD;\n}\nfooter .fourth img[data-v-4ab6097e] {\n  width: 150px;\n  padding: 10px 0;\n}\nfooter ul[data-v-4ab6097e] {\n  list-style: none;\n  padding: 0;\n}\nfooter ul li[data-v-4ab6097e] {\n  cursor: pointer;\n}", ""]);
+exports.push([module.i, "*[data-v-4ab6097e] {\n  box-sizing: border-box;\n  padding: 0;\n  margin: 0;\n}\n.container[data-v-4ab6097e] {\n  margin: 0 auto;\n}\nfooter[data-v-4ab6097e] {\n  background-color: #36246b;\n  color: #fff;\n}\nfooter .listContainer[data-v-4ab6097e] {\n  padding: 50px 0;\n}\nfooter .listContainer .content[data-v-4ab6097e] {\n  background-color: #5D3EBD;\n  margin: 10px;\n  padding: 25px;\n  min-height: 250px;\n  border-radius: 5px;\n}\nfooter .listContainer .content ul[data-v-4ab6097e] {\n  list-style: none;\n}\nfooter .listContainer .content ul li[data-v-4ab6097e] {\n  cursor: pointer;\n}\n.fourth img[data-v-4ab6097e] {\n  width: 150px;\n  padding: 10px 0;\n}", ""]);
 
 // exports
 
@@ -7006,7 +7014,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "*[data-v-0851419a] {\n  box-sizing: border-box;\n  padding: 0;\n  margin: 0;\n}\n.container[data-v-0851419a] {\n  margin: 0 auto;\n}\nheader[data-v-0851419a] {\n  width: 100%;\n  position: absolute;\n}\nheader a[data-v-0851419a] {\n  color: white;\n  font-weight: bolder;\n}", ""]);
+exports.push([module.i, "*[data-v-0851419a] {\n  box-sizing: border-box;\n  padding: 0;\n  margin: 0;\n}\n.container[data-v-0851419a] {\n  margin: 0 auto;\n}\nheader[data-v-0851419a] {\n  width: 100%;\n  position: absolute;\n}\nheader .myContainer[data-v-0851419a] {\n  padding-top: 10px;\n}\nheader a[data-v-0851419a] {\n  color: white;\n  font-weight: bolder;\n}", ""]);
 
 // exports
 
